@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">WaitLess_P1</string>
+    <string name="empezar">Empezar</string>
+    <string name="usuario">Usuario</string>
+    <string name="bienvenido">¡Bienvenido a Wait Less!</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="log_in">Log in</string>
+    <string name="noCuenta">¿No tienes cuenta?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="wait_less">WAIT LESS</string>
+    <string name="seleccionParque">Selecciona un parque:</string>
+    <string name="atracciones">Atracciones</string>
+    <string name="ruta">Cómo llegar</string>
+    <string name="reservar">Reservar</string>
+    <string name="nombreAtraccion">TextView</string>
+    <string name="ok">OK</string>
+    <string name="tema">Tema</string>
+    <string name="perfil">Perfil</string>
+    <string name="reservas">Reservas</string>
+    <string name="home">Home</string>
+    <string name="tickets">Tickets</string>
+    <string name="codigo_qr">Código QR</string>
+    <string name="mapa">Mapa</string>
+    <string name="escanea">Escanea el código QR</string>
+    <string name="ver_detalles">Ver detalles</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="registro">Registro WaitLess</string>
+    <string name="selecTicket">Seleccionar Ticket</string>
+    <string-array name="tiposEntradas">
+        <item>Entradas</item>
+        <item>Entrada Básica</item>
+        <item>Entrada Familiar</item>
+        <item>Entrada VIP</item>
+        <item>Entrada PRO</item>
+    </string-array>
+    <string name="listAtrac">Lista Atracciones:</string>
+    <string name="escanearNFC">Sensor NFC</string>
+    <string name="cancRes">Cancelar Reserva</string>
+    <string name="numRes">Ingrese # De Reserva:</string>
+    <string name="nomAtra">Nombre Atracción:</string>
+    <string name="infRes">Información Reserva</string>
+    <string name="hora">Hora: </string>
+    <string name="asienRes">Asientos Reservados: </string>
+    <string name="estRes">Estado Reserva: </string>
+    <string name="titRes">Títular De La Reserva: </string>
+    <string name="aler">Las reservas no son reestablecidas</string>
+    <string name="infImp">¡¡ Importante !!</string>
+    <string name="hacRes">Reserva Atracción</string>
+    <string name="escAtra">Seleccione la atracción:</string>
+    <string-array name="atracciones">
+        <item>Atracción</item>
+        <item>Apocalipsis</item>
+        <item>Castillo Del Terror</item>
+        <item>Karts</item>
+        <item>Montaña Rusa</item>
+        <item>Juegos Infantiles</item>
+        <item>Rueda De La Fortuna</item>
+        <item>Simuladores Virtuales</item>
+        <item>Casa De Los Espejos</item>
+    </string-array>
+    <string name="numEnt">Seleccione número de puestos: </string>
+    <integer-array name="numPues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </integer-array>
+    <string name="selHoryDia">Seleccione hora y día: </string>
+    <string name="numerRes">Número De Reserva: </string>
+    <string name="detRes">Detalles Reserva</string>
+    <string name="rec">¡Recuerda estar 15 minutos antes de tu reserva!</string>
+</resources>

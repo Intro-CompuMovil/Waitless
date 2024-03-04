@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <ImageView
+        android:id="@+id/imagenParque"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/parquediversiones" />
+
+    <View
+        android:id="@+id/fondoRojo"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/lightRed" />
+
+    <ImageButton
+        android:id="@+id/iconoMapa"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@android:drawable/ic_dialog_map"
+        app:tint="@color/black"
+        android:contentDescription="@string/mapa"/>
+
+    <ImageButton
+        android:id="@+id/iconoQR"
+        android:layout_width="83dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/iconoMapa"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/qrcode"
+        android:contentDescription="@string/codigo_qr"/>
+
+    <ImageButton
+        android:id="@+id/iconoHome"
+        android:layout_width="83dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/iconoQR"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/home"
+        android:contentDescription="@string/home"
+        />
+
+    <ImageButton
+        android:id="@+id/iconoTicket"
+        android:layout_width="83dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/iconoHome"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ticket"
+        android:contentDescription="@string/tickets"/>
+
+    <ImageButton
+        android:id="@+id/iconoReserva"
+        android:layout_width="83dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/iconoTicket"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/reservas"
+        android:contentDescription="@string/reservas"/>
+
+    <RelativeLayout
+        android:id="@+id/franjaSuperior"
+        android:layout_width="match_parent"
+        android:layout_height="79dp">
+
+        <TextView
+            android:id="@+id/nombreApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/wait_less"
+            android:textColor="@color/red"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/iconoPerfil"
+            android:layout_width="72dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@id/nombreApp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/perfil"
+            android:contentDescription="@string/perfil"/>
+
+        <ImageButton
+            android:id="@+id/tema"
+            android:layout_width="72dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_toStartOf="@id/nombreApp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/tema"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/tono" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="509dp"
+        android:layout_below="@+id/franjaSuperior"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/contenido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seleccionParque"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/atracciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/rutaParque"
+            android:text="@string/atracciones"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp"/>
+
+        <Spinner
+            android:id="@+id/parques"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/contenido"
+            android:background="@color/Grey"
+            android:layout_marginTop="20dp"
+            android:entries="@array/nombresParques"
+            />
+
+        <Button
+            android:id="@+id/rutaParque"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/parques"
+            android:backgroundTint="@color/red"
+            android:text="@string/ruta"
+            android:layout_marginTop="20dp"/>
+
+        <RelativeLayout
+            android:id="@+id/atraccionIndividual"
+            android:layout_width="141dp"
+            android:layout_height="214dp"
+            android:layout_below="@id/atracciones"
+            android:layout_marginTop="20dp"
+            android:background="@color/Grey"
+            android:padding="10dp">
+
+
+            <TextView
+                android:id="@+id/nombreAtraccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nombreAtraccion"
+                android:layout_above="@id/botonReserva"
+                android:layout_marginBottom="15dp"
+                android:textSize="15sp"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/botonReserva"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/red"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/reservar"
+                android:layout_marginBottom="10dp"/>
+
+            <ImageView
+                android:id="@+id/imagenAtraccion"
+                android:layout_width="124dp"
+                android:layout_height="81dp"
+                android:layout_above="@id/nombreAtraccion"
+                android:layout_marginBottom="10dp" />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
+

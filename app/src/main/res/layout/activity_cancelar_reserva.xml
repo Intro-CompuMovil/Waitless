@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cancelar_ReservaActivity">
+
+    <ImageView
+        android:id="@+id/imagenParque"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/parquediversiones" />
+
+    <View
+        android:id="@+id/fondoRojo"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/lightRed" />
+
+    <ImageButton
+        android:id="@+id/iconoMapa"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@android:drawable/ic_dialog_map"
+        app:tint="@color/black"
+        android:contentDescription="@string/mapa"/>
+
+    <ImageButton
+        android:id="@+id/iconoQR"
+        android:layout_width="83dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/iconoMapa"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/qrcode"
+        android:contentDescription="@string/codigo_qr"/>
+
+    <ImageButton
+        android:id="@+id/iconoHome"
+        android:layout_width="83dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/iconoQR"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/home"
+        android:contentDescription="@string/home"
+        />
+
+    <ImageButton
+        android:id="@+id/iconoTicket"
+        android:layout_width="83dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/iconoHome"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ticket"
+        android:contentDescription="@string/tickets" />
+
+    <ImageButton
+        android:id="@+id/iconoReserva"
+        android:layout_width="83dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/iconoTicket"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/reservas"
+        android:contentDescription="@string/reservas"
+        app:tint="@color/red"/>
+
+    <RelativeLayout
+        android:id="@+id/franjaSuperior"
+        android:layout_width="match_parent"
+        android:layout_height="79dp">
+
+        <TextView
+            android:id="@+id/nombreApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/wait_less"
+            android:textColor="@color/red"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/iconoPerfil"
+            android:layout_width="72dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@id/nombreApp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/perfil"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/perfil" />
+
+        <ImageButton
+            android:id="@+id/tema"
+            android:layout_width="72dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_toStartOf="@id/nombreApp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/tema"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/tono" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id = "@+id/contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        android:layout_below="@id/franjaSuperior"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/canReserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:text="@string/cancRes"
+            android:textColor="@color/red"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/blanco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:layout_below="@+id/canReserva"
+            />
+
+        <TextView
+            android:id="@+id/numReserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numRes"
+            android:textSize="20sp"
+            android:layout_below="@+id/blanco"
+            />
+
+        <EditText
+            android:id="@+id/numeReser"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Número De Reserva"
+            android:layout_below="@+id/numReserva"
+            />
+
+        <TextView
+            android:id="@+id/blanco2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:layout_below="@+id/numeReser"
+            />
+
+        <TextView
+            android:id="@+id/nomAtraccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nomAtra"
+            android:textSize="20sp"
+            android:layout_below="@+id/blanco2"
+            />
+
+        <EditText
+            android:id="@+id/nombAtraccion"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Nombre Atracción"
+            android:layout_below="@+id/nomAtraccion"
+            />
+
+        <TextView
+            android:id="@+id/blanco3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:layout_below="@+id/nombAtraccion"
+            />
+
+        <TextView
+            android:id="@+id/infoReserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/infRes"
+            android:textSize="20sp"
+            android:layout_below="@+id/blanco3"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/blanco4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:layout_below="@+id/infoReserva"
+            />
+
+        <TextView
+            android:id="@+id/hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hora"
+            android:textSize="20sp"
+            android:layout_below="@+id/blanco4"
+            />
+
+        <TextView
+            android:id="@+id/asienReservados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/asienRes"
+            android:textSize="20sp"
+            android:layout_below="@+id/hora"
+            />
+
+        <TextView
+            android:id="@+id/estReserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/estRes"
+            android:textSize="20sp"
+            android:layout_below="@+id/asienReservados"
+            />
+
+        <TextView
+            android:id="@+id/titReserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titRes"
+            android:textSize="20sp"
+            android:layout_below="@+id/estReserva"
+            />
+
+        <TextView
+            android:id="@+id/blanco5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="5sp"
+            android:layout_below="@+id/titReserva"
+            />
+
+        <TextView
+            android:id="@+id/infoImportante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/infImp"
+            android:textSize="20sp"
+            android:layout_below="@+id/blanco5"
+            android:textColor="@color/red"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/alerta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/aler"
+            android:textSize="20sp"
+            android:layout_below="@id/infoImportante"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/escNFC"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contenedor"
+        android:layout_centerHorizontal="true"
+        android:text="@string/cancRes"
+        android:backgroundTint="@color/red" />
+
+</RelativeLayout>
