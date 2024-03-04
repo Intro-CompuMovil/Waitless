@@ -17,21 +17,19 @@
             android:exported="false" />
         <activity
             android:name=".MapaActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
         <activity
-            android:name=".Cancelar_ReservaActivity"
+            android:name=".CancelarReservaActivity"
             android:exported="false" />
         <activity
-            android:name=".Ver_ReservaActivity"
+            android:name=".VerReservaActivity"
             android:exported="false" />
         <activity
-            android:name=".Crear_ReservaActivity"
+            android:name=".CrearReservaActivity"
             android:exported="false" />
         <activity
             android:name=".SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SigninActivity"
             android:exported="false" />
         <activity
             android:name=".RutaActivity"
