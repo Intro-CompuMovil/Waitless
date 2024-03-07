@@ -59,14 +59,20 @@
         <item>Casa De Los Espejos</item>
     </string-array>
     <string name="numEnt">Seleccione número de puestos: </string>
-    <integer-array name="numPues">
+    <string-array name="numPues">
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
-    </integer-array>
+    </string-array>
     <string name="selHoryDia">Seleccione hora y día: </string>
     <string name="numerRes">Número De Reserva: </string>
     <string name="detRes">Detalles Reserva</string>
     <string name="rec">¡Recuerda estar 15 minutos antes de tu reserva!</string>
+    <string name="menCan">Actualmente no cuenta con ninguna reserva</string>
+    <string name="menCan2">Busque el boton reservar para una nueva reserva</string>
+    <string name="reaRe">Realizar Reserva</string>
+    <string name="usuarioo">Usuario</string>
+    <string name="origen">Origen:</string>
+    <string name="destino">Destino:</string>
 </resources>

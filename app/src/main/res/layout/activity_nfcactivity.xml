@@ -13,15 +13,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:fontFamily="@font/lilita_one"
         android:paddingHorizontal="20dp"
+        android:fontFamily="@font/lilita_one"
         android:text="¡¡Acerca tu celular al lector!!"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="60sp" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/exitbutton"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="#6CDC62"
@@ -30,6 +30,9 @@
         android:scaleType="fitCenter"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        app:tint="#FFFFFF" />
+        app:tint="#FFFFFF"
+        android:hint="Este es el botón de cerrar"
+        android:contentDescription="Este botón sirve para cerrar pantalla"
+        />
 
 </RelativeLayout>

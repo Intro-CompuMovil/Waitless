@@ -132,9 +132,9 @@
             android:id="@+id/tipoEntrada"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="8dp"
             android:layout_below="@+id/seleccionar"
-            android:entries="@string/selecTicket"/>
+            android:entries="@array/tiposEntradas"/>
 
         <TextView
             android:id="@+id/listAtracciones"

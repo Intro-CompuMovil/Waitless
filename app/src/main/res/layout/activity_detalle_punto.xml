@@ -18,7 +18,9 @@
         android:background="#FFFFFF"
         android:scaleType="fitCenter"
         android:src="@drawable/exit_button"
-        app:tint="@color/red" />
+        app:tint="@color/red"
+        android:hint="Este es el botón de cerrar"
+        android:contentDescription="Este botón sirve para cerrar pantalla"/>
 
     <ImageView
         android:id="@+id/imagenAtraccion"

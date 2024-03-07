@@ -1,0 +1,7 @@
+{
+  "credenciales":[
+    {"id": 1, "nombre": "Sara", "apellido": "Gutierrez", "usuario":  "saragz", "contraseña":  "sara123"},
+    {"id": 2, "nombre": "Felipe", "apellido": "Fernandez", "usuario":  "felipefz", "contraseña":  "felipe234"},
+    {"id": 3, "nombre": "Adrián", "apellido": "Ruiz", "usuario":  "adrianrz", "contraseña":  "adrian345"}
+  ]
+}

@@ -152,10 +152,10 @@
         <Spinner
             android:id="@+id/tipoAtraccion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:padding="10dp"
             android:layout_below="@+id/escoAtraccion"
-            android:entries="@string/atracciones"/>
+            android:entries="@array/atracciones"/>
 
         <TextView
             android:id="@+id/blanco2"
@@ -178,10 +178,10 @@
         <Spinner
             android:id="@+id/numPuestos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
             android:layout_below="@+id/numEntradas"
-            android:entries="@string/numEnt"/>
+            android:entries="@array/numPues" />
 
         <TextView
             android:id="@+id/blanco3"
@@ -216,6 +216,16 @@
             android:textSize="20sp"
             android:layout_below="@+id/imagenReservaHora"
             />
+
+        <TextView
+            android:id="@+id/numRes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/numReserva"
+            android:layout_alignBaseline="@id/numReserva"
+            android:text=" A32"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
