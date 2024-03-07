@@ -21,10 +21,16 @@ class ReservasActivity : AppCompatActivity() {
             startActivity(Intent(this,HomeActivity::class.java))
         }
         findViewById<ImageButton>(R.id.iconoQR).setOnClickListener{
-            startActivity(Intent(this,ScanqrActivity::class.java))
+            startActivity(Intent(this,PermisoCamaraActivity::class.java))
         }
         findViewById<ImageButton>(R.id.iconoMapa).setOnClickListener{
             startActivity(Intent(this,MapaActivity::class.java))
+        }
+        findViewById<ImageButton>(R.id.iconoPerfil).setOnClickListener{
+            startActivity(Intent(this,LoginActivity::class.java))
+        }
+        findViewById<ImageButton>(R.id.tema).setOnClickListener{
+            Toast.makeText(this, "Sensor tema", Toast.LENGTH_LONG).show()
         }
         findViewById<Button>(R.id.verDetallesReserva).setOnClickListener{
             startActivity(Intent(this,VerReservaActivity::class.java))
