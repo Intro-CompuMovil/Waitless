@@ -1,18 +1,28 @@
 package com.example.waitless_p1
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Display
 import android.view.Surface
 import android.view.WindowManager
+import android.widget.ImageButton
 import android.widget.ImageView
 
 class MapaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mapa)
+
+        val pointOnMap:ImageButton = findViewById(R.id.punto4)
+
+        pointOnMap.setOnClickListener {
+            startActivity(Intent(this, DetallePunto::class.java))
+        }
+
+        //PARA ROTACIÓN
         // Mantener la pantalla en modo horizontal
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
 
