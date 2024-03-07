@@ -224,6 +224,16 @@
             />
 
         <TextView
+            android:id="@+id/hora2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/hora"
+            android:layout_alignBaseline="@id/hora"
+            android:text=" 3:00pm"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/asienReservados"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -231,6 +241,16 @@
             android:textSize="20sp"
             android:layout_below="@+id/hora"
             />
+
+        <TextView
+            android:id="@+id/asRes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/asienReservados"
+            android:layout_alignBaseline="@id/asienReservados"
+            android:text=" 4"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/estReserva"
@@ -242,6 +262,16 @@
             />
 
         <TextView
+            android:id="@+id/estado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/estReserva"
+            android:layout_alignBaseline="@id/estReserva"
+            android:text=" Avtiva"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/titReserva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -249,6 +279,16 @@
             android:textSize="20sp"
             android:layout_below="@+id/estReserva"
             />
+
+        <TextView
+            android:id="@+id/titular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/titReserva"
+            android:layout_alignBaseline="@id/titReserva"
+            android:text=" Oscar Martinez"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/blanco5"
@@ -283,7 +323,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/escNFC"
+        android:id="@+id/cancReserva"
         android:layout_width="174dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/contenedor"

@@ -148,6 +148,17 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/nombreAtra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/nomAtraccion"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@id/nomAtraccion"
+            android:text=" Apocalipsis"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/blanco2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -183,12 +194,32 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/hora2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/hora"
+            android:layout_alignBaseline="@id/hora"
+            android:text=" 3:00pm"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/asReservados"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/hora"
             android:text="@string/asienRes"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/reservados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/asReservados"
+            android:layout_alignBaseline="@id/asReservados"
+            android:text=" 4"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/estReserva"
@@ -199,6 +230,16 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/estado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/estReserva"
+            android:layout_alignBaseline="@id/estReserva"
+            android:text=" Activa"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/titReserva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -207,12 +248,32 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/titular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/titReserva"
+            android:layout_alignBaseline="@id/titReserva"
+            android:text="Oscar Martinez"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/numReserva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titReserva"
             android:text="@string/numerRes"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/numero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/numReserva"
+            android:layout_alignBaseline="@id/numReserva"
+            android:text=" A101"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/blanco4"
