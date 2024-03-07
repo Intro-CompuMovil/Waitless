@@ -43,6 +43,12 @@ class HomeActivity : AppCompatActivity() {
         findViewById<Button>(R.id.botonReserva).setOnClickListener{
             startActivity(Intent(this,CrearReservaActivity::class.java))
         }
+        findViewById<ImageButton>(R.id.iconoPerfil).setOnClickListener{
+            startActivity(Intent(this,LoginActivity::class.java))
+        }
+        findViewById<ImageButton>(R.id.tema).setOnClickListener{
+            Toast.makeText(this, "Sensor cambio tema", Toast.LENGTH_LONG).show()
+        }
     }
 
 }
