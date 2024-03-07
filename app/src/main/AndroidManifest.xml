@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-permission android:name="android.hardware.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaitLess_P1"
         tools:targetApi="31">
+        <activity
+            android:name=".PermisoRutaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PermisoCamaraActivity"
+            android:exported="false" />
         <activity
             android:name=".ReservasCanceladas"
             android:exported="false" />
@@ -51,7 +63,7 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
@@ -60,11 +72,9 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

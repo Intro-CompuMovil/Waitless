@@ -152,7 +152,7 @@
         <Spinner
             android:id="@+id/tipoAtraccion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:padding="10dp"
             android:layout_below="@+id/escoAtraccion"
             android:entries="@array/atracciones"/>
@@ -178,7 +178,7 @@
         <Spinner
             android:id="@+id/numPuestos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:padding="8dp"
             android:layout_below="@+id/numEntradas"
             android:entries="@array/numPues" />

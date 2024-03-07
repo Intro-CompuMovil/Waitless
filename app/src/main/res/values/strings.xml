@@ -28,7 +28,7 @@
     <string name="selecTicket">Seleccionar Ticket</string>
     <string-array name="tiposEntradas">
         <item>Entradas</item>
-        <item>Entrada Basica</item>
+        <item>Entrada Básica</item>
         <item>Entrada Familiar</item>
         <item>Entrada VIP</item>
         <item>Entrada PRO</item>
@@ -72,4 +72,7 @@
     <string name="menCan">Actualmente no cuenta con ninguna reserva</string>
     <string name="menCan2">Busque el boton reservar para una nueva reserva</string>
     <string name="reaRe">Realizar Reserva</string>
+    <string name="usuarioo">Usuario</string>
+    <string name="origen">Origen:</string>
+    <string name="destino">Destino:</string>
 </resources>

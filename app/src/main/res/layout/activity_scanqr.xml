@@ -139,7 +139,7 @@
             android:text="@string/ok" />
 
         <RelativeLayout
-            android:id="@+id/atraccionIndividual"
+            android:id="@+id/camara"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_below="@id/escanear"

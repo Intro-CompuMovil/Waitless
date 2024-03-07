@@ -37,10 +37,11 @@
 
     <View
         android:id="@+id/cajaBlanca"
-        android:layout_width="292dp"
-        android:layout_height="297dp"
+        android:layout_width="295dp"
+        android:layout_height="312dp"
         android:layout_below="@id/logo"
         android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:background="@color/white" />
 
     <EditText
@@ -50,7 +51,7 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:inputType="text"
-        android:hint="Nombre Usuario"/>
+        android:hint="@string/usuario"/>
 
     <TextView
         android:id="@+id/mensajeBienvenido"
@@ -70,7 +71,7 @@
         android:inputType="textPassword"
         android:layout_below="@id/usuario"
         android:layout_centerHorizontal="true"
-        android:hint="Contraseña"/>
+        android:hint="@string/contrasena"/>
 
     <Button
         android:id="@+id/login"

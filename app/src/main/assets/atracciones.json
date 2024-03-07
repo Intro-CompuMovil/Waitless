@@ -1,0 +1,12 @@
+{
+  "atracciones":[
+    {"id": 1, "nombre": "Apocalipsis", "parque": "Salitre Mágico"},
+    {"id": 2, "nombre": "Castillo Del Terror", "parque": "Salitre Mágico"},
+    {"id": 3, "nombre": "Karts", "parque": "Multiparque"},
+    {"id": 4, "nombre": "Trampolines", "parque": "Multiparque"},
+    {"id": 5, "nombre": "Ranger", "parque": "Mundo aventura"},
+    {"id": 6, "nombre": "Air race", "parque": "Mundo aventura"},
+    {"id": 7, "nombre": "Carros chocones", "parque": "Jaime Duque"},
+    {"id": 8, "nombre": "Carrusel", "parque": "Jaime Duque"}
+  ]
+}

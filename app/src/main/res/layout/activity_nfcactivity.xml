@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:fontFamily="@font/lilita_one"
         android:paddingHorizontal="20dp"
+        android:fontFamily="@font/lilita_one"
         android:text="¡¡Acerca tu celular al lector!!"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
@@ -30,6 +30,9 @@
         android:scaleType="fitCenter"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        app:tint="#FFFFFF" />
+        app:tint="#FFFFFF"
+        android:hint="Este es el botón de cerrar"
+        android:contentDescription="Este botón sirve para cerrar pantalla"
+        />
 
 </RelativeLayout>
