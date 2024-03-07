@@ -172,7 +172,7 @@
                 android:id="@+id/nombreAtraccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/nombreAtraccion"
+                android:text="Apocalipsis"
                 android:layout_above="@id/botonReserva"
                 android:layout_marginBottom="15dp"
                 android:textSize="15sp"
@@ -193,7 +193,8 @@
                 android:layout_width="124dp"
                 android:layout_height="81dp"
                 android:layout_above="@id/nombreAtraccion"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="10dp"
+                android:src = "@drawable/apocalipsis"/>
 
         </RelativeLayout>
 

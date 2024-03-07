@@ -28,7 +28,7 @@
     <string name="selecTicket">Seleccionar Ticket</string>
     <string-array name="tiposEntradas">
         <item>Entradas</item>
-        <item>Entrada Básica</item>
+        <item>Entrada Basica</item>
         <item>Entrada Familiar</item>
         <item>Entrada VIP</item>
         <item>Entrada PRO</item>
