@@ -149,13 +149,15 @@
             android:layout_below="@+id/blanco"
             />
 
-        <Spinner
+        <TextView
             android:id="@+id/tipoAtraccion"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:padding="10dp"
+            android:text="@string/nombre_atraccion"
+            android:textSize="20sp"
+            android:paddingTop="10dp"
             android:layout_below="@+id/escoAtraccion"
-            android:entries="@array/atracciones"/>
+            />
 
         <TextView
             android:id="@+id/blanco2"

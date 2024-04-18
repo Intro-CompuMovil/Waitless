@@ -13,7 +13,7 @@ class ReservasCanceladas : AppCompatActivity() {
         setContentView(R.layout.activity_reservas_canceladas)
 
         findViewById<Button>(R.id.hacerReserva).setOnClickListener {
-            startActivity(Intent(this, CrearReservaActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
         }
         findViewById<ImageButton>(R.id.iconoTicket).setOnClickListener {
             startActivity(Intent(this, TicketsActivity::class.java))
@@ -28,7 +28,7 @@ class ReservasCanceladas : AppCompatActivity() {
             startActivity(Intent(this, MapaActivity::class.java))
         }
         findViewById<ImageButton>(R.id.iconoPerfil).setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, PerfilActivity::class.java))
         }
         findViewById<ImageButton>(R.id.tema).setOnClickListener {
             Toast.makeText(this, "Sensor tema", Toast.LENGTH_LONG).show()
