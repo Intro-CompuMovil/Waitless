@@ -33,7 +33,7 @@ class CancelarReservaActivity : AppCompatActivity() {
             startActivity(Intent(this,MapaActivity::class.java))
         }
         findViewById<ImageButton>(R.id.iconoPerfil).setOnClickListener{
-            startActivity(Intent(this,LoginActivity::class.java))
+            startActivity(Intent(this,PerfilActivity::class.java))
         }
         findViewById<ImageButton>(R.id.tema).setOnClickListener{
             Toast.makeText(this, "Sensor tema", Toast.LENGTH_LONG).show()
