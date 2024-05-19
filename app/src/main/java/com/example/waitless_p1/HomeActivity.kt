@@ -19,6 +19,8 @@ import java.io.InputStream
 
 class HomeActivity : AppCompatActivity() {
 
+    var item: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -50,6 +52,27 @@ class HomeActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.tema).setOnClickListener{
             Toast.makeText(this, "Sensor cambio tema", Toast.LENGTH_LONG).show()
         }
+
+        val parques = findViewById<Spinner>(R.id.parques)
+        parques.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>,
+                selectedItemView: View,
+                position: Int,
+                id: Long
+            ) {
+                item = parentView.getItemAtPosition(position).toString()
+                // Aquí puedes agregar el código que deseas ejecutar cuando se selecciona un elemento del spinner
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+                // Aquí puedes agregar el código que deseas ejecutar cuando no se selecciona ningún elemento del spinner
+            }
+        }
+        findViewById<Button>(R.id.rutaParque).setOnClickListener{
+            startActivity(Intent(this,PermisoRutaActivity::class.java).putExtra("nombre", item.toString()))
+        }
+
     }
 
 }
