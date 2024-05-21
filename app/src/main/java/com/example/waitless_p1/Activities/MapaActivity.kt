@@ -1,6 +1,5 @@
-package com.example.waitless_p1
+package com.example.waitless_p1.Activities
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +9,7 @@ import android.view.Surface
 import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.ImageView
+import com.example.waitless_p1.R
 
 class MapaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +19,7 @@ class MapaActivity : AppCompatActivity() {
         val pointOnMap:ImageButton = findViewById(R.id.punto4)
 
         pointOnMap.setOnClickListener {
-            startActivity(Intent(this, DetallePunto::class.java))
+            startActivity(Intent(this, DetallePuntoActivity::class.java))
         }
 
         //PARA ROTACIÓN
