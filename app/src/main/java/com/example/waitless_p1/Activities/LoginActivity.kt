@@ -1,14 +1,10 @@
-package com.example.waitless_p1
+package com.example.waitless_p1.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import org.json.JSONObject
-import java.io.IOException
-import java.io.InputStream
+import com.example.waitless_p1.R
 
 class LoginActivity : AppCompatActivity() {
 

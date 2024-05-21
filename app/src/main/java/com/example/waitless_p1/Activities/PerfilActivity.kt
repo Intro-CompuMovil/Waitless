@@ -1,4 +1,4 @@
-package com.example.waitless_p1
+package com.example.waitless_p1.Activities
 
 import android.app.Activity
 import android.content.ContentValues
@@ -10,14 +10,13 @@ import android.provider.MediaStore
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.waitless_p1.Data.Datos
+import com.example.waitless_p1.R
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 

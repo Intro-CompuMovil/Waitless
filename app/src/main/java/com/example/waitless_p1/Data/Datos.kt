@@ -1,4 +1,4 @@
-package com.example.waitless_p1
+package com.example.waitless_p1.Data
 
 class Datos {
     companion object{
