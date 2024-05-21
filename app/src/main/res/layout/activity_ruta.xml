@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,168 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".RutaActivity">
 
-    <ImageView
-        android:id="@+id/imagenParque"
+    <org.osmdroid.views.MapView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/parquediversiones" />
+        android:layout_height="match_parent"
+        android:id="@+id/osmMap">
+    </org.osmdroid.views.MapView>
 
-    <View
-        android:id="@+id/fondoRojo"
+    <EditText
+        android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/lightRed" />
-
-    <ImageButton
-        android:id="@+id/iconoMapa"
-        android:layout_width="83dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        app:srcCompat="@android:drawable/ic_dialog_map"
-        app:tint="@color/black"
-        android:contentDescription="@string/mapa"/>
-
-    <ImageButton
-        android:id="@+id/iconoQR"
-        android:layout_width="83dp"
-        android:layout_height="52dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@id/iconoMapa"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/qrcode"
-        android:contentDescription="@string/codigo_qr"/>
-
-    <ImageButton
-        android:id="@+id/iconoHome"
-        android:layout_width="83dp"
-        android:layout_height="52dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@id/iconoQR"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/home"
-        android:contentDescription="@string/home"
+        android:ems="10"
+        android:inputType="text"
+        android:imeOptions="actionSend"
+        android:hint="Ingrese una dirección"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:padding="10dp"
         />
 
-    <ImageButton
-        android:id="@+id/iconoTicket"
-        android:layout_width="83dp"
-        android:layout_height="52dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@id/iconoHome"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/ticket"
-        android:contentDescription="@string/tickets"/>
-
-    <ImageButton
-        android:id="@+id/iconoReserva"
-        android:layout_width="83dp"
-        android:layout_height="52dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@id/iconoTicket"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/reservas"
-        android:contentDescription="@string/reservas"/>
-
-    <RelativeLayout
-        android:id="@+id/franjaSuperior"
-        android:layout_width="match_parent"
-        android:layout_height="79dp">
-
-        <TextView
-            android:id="@+id/nombreApp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/wait_less"
-            android:textColor="@color/red"
-            android:textSize="35sp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/iconoPerfil"
-            android:layout_width="72dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_toEndOf="@id/nombreApp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/perfil"
-            android:contentDescription="@string/perfil"/>
-
-        <ImageButton
-            android:id="@+id/tema"
-            android:layout_width="72dp"
-            android:layout_height="48dp"
-            android:layout_centerInParent="true"
-            android:layout_toStartOf="@id/nombreApp"
-            android:layout_alignParentStart="true"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/tono"
-            android:contentDescription="@string/tema"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="603dp"
-        android:layout_below="@+id/franjaSuperior"
-        android:padding="30dp">
-
-        <TextView
-            android:id="@+id/origenRuta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="@string/origen"
-            android:textColor="@color/red"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/direccionOrigen"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/origenRuta"
-            android:layout_alignParentEnd="true"
-            android:ems="10"
-            android:inputType="text" />
-
-        <TextView
-            android:id="@+id/destinoRuta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_below="@+id/origenRuta"
-            android:text="@string/destino"
-            android:textColor="@color/red"
-            android:paddingTop="10dp"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/direccionDestino"
-            android:layout_width="278dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/direccionOrigen"
-            android:layout_alignEnd="@+id/destinoRuta"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp"
-            android:ems="10"
-            android:inputType="text" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="310dp"
-            android:layout_height="394dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            app:srcCompat="@drawable/rutamapa" />
-
-
-    </RelativeLayout>
-
-
-
-</RelativeLayout>
+</FrameLayout>
