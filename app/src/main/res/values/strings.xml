@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WaitLess_P1</string>
+    <string name="app_name">Waitless</string>
     <string name="empezar">Empezar</string>
     <string name="usuario">Usuario</string>
     <string name="bienvenido">¡Bienvenido a Wait Less!</string>
@@ -75,4 +75,9 @@
     <string name="usuarioo">Usuario</string>
     <string name="origen">Origen:</string>
     <string name="destino">Destino:</string>
+    <string name="galeria">Galeria</string>
+    <string name="camara">Camara</string>
+    <string name="informacion_cuenta">Información cuenta</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="nombre_atraccion">Nombre de la atracción</string>
 </resources>

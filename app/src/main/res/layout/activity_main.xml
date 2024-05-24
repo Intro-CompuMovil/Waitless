@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Activities.MainActivity">
 
     <ImageView
         android:id="@+id/imagenParque"
@@ -18,7 +18,7 @@
         android:id="@+id/fondoOscuro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lightBlack" />
+        android:background="#83000000" />
 
     <Button
         android:id="@+id/buttonEmpezar"

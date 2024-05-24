@@ -1,4 +1,4 @@
-package com.example.waitless_p1
+package com.example.waitless_p1.Activities
 
 
 import android.content.Intent
@@ -11,8 +11,10 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.waitless_p1.Datos.Companion.MY_PERMISSION_REQUEST_CAMARA
-import java.io.File
+import com.example.waitless_p1.Data.Datos
+import com.example.waitless_p1.Data.Datos.Companion.MY_PERMISSION_REQUEST_CAMARA
+import com.example.waitless_p1.R
+import com.google.zxing.integration.android.IntentIntegrator
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -36,19 +38,19 @@ class ScanqrActivity : AppCompatActivity() {
             startActivity(Intent(this, HomeActivity::class.java))
         }
         findViewById<ImageButton>(R.id.iconoQR).setOnClickListener{
-            startActivity(Intent(this,PermisoCamaraActivity::class.java))
+            startActivity(Intent(this, PermisoCamaraActivity::class.java))
         }
         findViewById<ImageButton>(R.id.iconoMapa).setOnClickListener{
-            startActivity(Intent(this,MapaActivity::class.java))
+            startActivity(Intent(this, MapaActivity::class.java))
         }
         findViewById<ImageButton>(R.id.iconoPerfil).setOnClickListener{
-            startActivity(Intent(this,LoginActivity::class.java))
+            startActivity(Intent(this, PerfilActivity::class.java))
         }
         findViewById<ImageButton>(R.id.tema).setOnClickListener{
             Toast.makeText(this, "Sensor tema", Toast.LENGTH_LONG).show()
         }
         findViewById<Button>(R.id.botonOK).setOnClickListener {
-            startCamera()
+            startQRScanner()
         }
 
         findViewById<ImageButton>(R.id.iconoQR).setOnClickListener {
@@ -61,6 +63,10 @@ class ScanqrActivity : AppCompatActivity() {
                 requestCameraPermission()
             }
         }
+    }
+
+    private fun startQRScanner() {
+        IntentIntegrator(this).initiateScan()
     }
 
     private fun checkCameraPermission(): Boolean {
@@ -96,7 +102,7 @@ class ScanqrActivity : AppCompatActivity() {
             MY_PERMISSION_REQUEST_CAMARA -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Si los permisos fueron concedidos, iniciar la cámara
-                    startCamera()
+                    startQRScanner()
                 } else {
                     // Si los permisos fueron denegados, mostrar un mensaje
                     Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show()
