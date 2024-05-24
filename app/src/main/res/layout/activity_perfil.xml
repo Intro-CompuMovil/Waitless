@@ -29,96 +29,92 @@
         android:layout_marginTop="0dp"
         android:background="@color/Grey" />
 
-    <View
+    <LinearLayout
         android:id="@+id/cajaBlanca"
         android:layout_width="315dp"
         android:layout_height="587dp"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-19dp"
-        android:background="@color/white" />
+        android:background="@color/white"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/informacionCuenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= "@string/informacion_cuenta"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="12dp"/>
 
-    <EditText
-        android:id="@+id/correo"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_centerInParent="true"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Correo"
-        />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewContact"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/contactos_de_google"
+            android:layout_gravity="center_horizontal"
+            />
 
-    <EditText
-        android:id="@+id/apellido"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_centerInParent="true"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Apellido"
-        android:layout_below="@+id/nombre"
-        />
+        <Button
+            android:id="@+id/buttonSelectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/red"
+            android:text="Seleccionar imagen"
+            android:padding="8dp"
+            android:textSize="10sp" />
 
-    <EditText
-        android:id="@+id/nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_centerInParent="true"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Nombre"
-        android:layout_below="@id/correo"
-        />
-    <EditText
-        android:id="@+id/nombreUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_centerInParent="true"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="NombreUsuario"
-        android:layout_below="@+id/apellido"
-        />
+        <EditText
+            android:id="@+id/nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Nombre"
+            />
 
-    <EditText
-        android:id="@+id/contraseña"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_centerInParent="true"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Contraseña"
-        android:layout_below="@+id/nombreUsuario"
-        />
+        <EditText
+            android:id="@+id/apellido"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Apellido"
+            />
 
-    <TextView
-        android:id="@+id/informacionCuenta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/informacion_cuenta"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_above="@id/fotoPerfil"
-        android:layout_marginBottom="10dp"/>
+        <EditText
+            android:id="@+id/telefono"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Teléfono"
+            />
 
-    <ImageView
-        android:id="@+id/fotoPerfil"
-        android:layout_width="200dp"
-        android:layout_height="180dp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/correo"
-        app:srcCompat="@drawable/ic_perfil" />
+        <Button
+            android:id="@+id/guardar"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Guardar"
+            android:backgroundTint="@color/red" />
 
-    <Button
-        android:id="@+id/cerrarSesion"
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/contraseña"
-        android:layout_centerHorizontal="true"
-        android:text="@string/cerrar_sesion"
-        android:backgroundTint="@color/red"/>
+        <Button
+            android:id="@+id/cerrarSesion"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/cerrar_sesion"
+            android:backgroundTint="@color/red"/>
 
+    </LinearLayout>
 
 </RelativeLayout>
