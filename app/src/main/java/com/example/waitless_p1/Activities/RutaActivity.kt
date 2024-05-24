@@ -1,29 +1,13 @@
-package com.example.waitless_p1
+package com.example.waitless_p1.Activities
 
-import android.Manifest
-import android.annotation.SuppressLint
 import android.app.UiModeManager
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Geocoder
-import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
-import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import com.example.waitless_p1.Datos.Companion.MY_PERMISSION_REQUEST_LOCATION
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
 import org.json.JSONArray
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
@@ -41,11 +25,6 @@ import java.io.FileWriter
 import java.io.IOException
 import java.io.Writer
 import java.util.Date
-import kotlin.math.atan2
-import kotlin.math.cos
-import kotlin.math.pow
-import kotlin.math.sin
-import kotlin.math.sqrt
 import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -53,8 +32,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.location.Address
 import android.location.LocationManager
-import android.view.KeyEvent
-import com.wdullaer.materialdatetimepicker.BuildConfig
+import com.example.waitless_p1.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -71,17 +49,18 @@ import kotlin.math.roundToInt
 class RutaActivity : AppCompatActivity() {
 
     private lateinit var locationManager: LocationManager
-    private  var latitud : Double = 0.0
-    private  var longitud : Double = 0.0
-    private  var altitud : Double = 0.0
+    private var latitud: Double = 0.0
+    private var longitud: Double = 0.0
+    private var altitud: Double = 0.0
     private var lastLocation: GeoPoint = GeoPoint(latitud, longitud)
-    private lateinit var lastLocation1 : MyLocationNewOverlay
-    var check : Boolean = false
+    private lateinit var lastLocation1: MyLocationNewOverlay
+    var check: Boolean = false
     private lateinit var map: MapView
+    private var mGeocoder: Geocoder? = null
     private lateinit var locationOverlay: MyLocationNewOverlay
-    private lateinit var sensorManager : SensorManager
-    private var lightSensor : Sensor? = null
-    private var lightSensorListener : SensorEventListener? = null
+    private lateinit var sensorManager: SensorManager
+    private var lightSensor: Sensor? = null
+    private var lightSensorListener: SensorEventListener? = null
     private var lastMarker: GeoPoint = GeoPoint(latitud, longitud)
     lateinit var roadManager: RoadManager
     private var roadOverlay: Polyline? = null
@@ -91,14 +70,32 @@ class RutaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ruta)
 
         var search = findViewById<EditText>(R.id.editText)
+        var parque = intent.getStringExtra("nombre")
 
         roadManager = OSRMRoadManager(this, "ANDROID")
-        SearchService(search)
+        //SearchService(search)
+        if (parque != null) {
+            SearchService(parque)
+        }
         Configuration.getInstance().setUserAgentValue(org.osmdroid.library.BuildConfig.BUILD_TYPE)
         map = findViewById(R.id.osmMap)
         map.setTileSource(TileSourceFactory.MAPNIK)
         map.setBuiltInZoomControls(true)
         map.setMultiTouchControls(true)
+        map.setMultiTouchControls(true)
+
+        val initialLatitude = 4.62894444
+        val initialLongitude = -74.06485
+        val initialGeoPoint = GeoPoint(initialLatitude, initialLongitude)
+        val mapController: IMapController = map.controller
+        mapController.setCenter(initialGeoPoint)
+        mapController.setZoom(15.0)
+
+        val startGeoPoint = GeoPoint(4.62894444, -74.06485)
+        val destinationGeoPoint = GeoPoint(34.0522, -118.2437) // Los Angeles
+        drawRoute(startGeoPoint, destinationGeoPoint)
+
+        map.controller.setZoom(15.0)
         setUpSensorStuff()
         map.overlays.add(createOverlayEvents())
 
@@ -120,16 +117,22 @@ class RutaActivity : AppCompatActivity() {
                     roadOverlay?.outlinePaint?.strokeWidth = 10f
                     map.overlays.add(roadOverlay)
                     val distance = start.distanceToAsDouble(finish)
-                    Toast.makeText(this@RutaActivity, "La distancia entre los puntos son : $distance metros", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@RutaActivity,
+                        "La distancia entre los puntos son : $distance metros",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
     }
+
     private fun createOverlayEvents(): MapEventsOverlay {
         val overlayEventos = MapEventsOverlay(object : MapEventsReceiver {
             override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
                 return false
             }
+
             override fun longPressHelper(p: GeoPoint): Boolean {
                 longPressOnMap(p)
                 return true
@@ -137,6 +140,7 @@ class RutaActivity : AppCompatActivity() {
         })
         return overlayEventos
     }
+
     private fun longPressOnMap(p: GeoPoint) {
         val coder = Geocoder(this)
         val addresses: List<Address>?
@@ -157,7 +161,33 @@ class RutaActivity : AppCompatActivity() {
             }
         }
     }
-    private fun SearchService(search: EditText){
+
+    private fun SearchService(parque: String) {
+        val location = getLocationFromText(parque)
+        Toast.makeText(applicationContext, parque, Toast.LENGTH_SHORT).show()
+        if (location != null) {
+            val mapController = map.controller
+            mapController.setCenter(location)
+            mapController.setZoom(15.0) // Hacer zoom en el punto indicado
+            Toast.makeText(applicationContext, "Ubicación encontrada $location", Toast.LENGTH_LONG)
+                .show()
+            val marker = Marker(map)
+            marker.position = location
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            map.overlays.add(marker)
+            lastMarker = location
+            if (lastLocation != null) {
+                val initialLatitude = 4.62894444
+                val initialLongitude = -74.06485
+                val initialGeoPoint = GeoPoint(initialLatitude, initialLongitude)
+                drawRoute(initialGeoPoint, lastMarker)
+            }
+        }
+        // Aquí puedes agregar lo que deseas hacer cuando se presione Enter, como realizar una búsqueda
+
+    }
+
+    /*private fun SearchService(search: EditText){
         search.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                 event?.action == KeyEvent.ACTION_DOWN &&
@@ -171,16 +201,18 @@ class RutaActivity : AppCompatActivity() {
                 if (location != null) {
                     val mapController = map.controller
                     mapController.setCenter(location)
-                    mapController.setZoom(15.0)
+                    mapController.setZoom(15.0) // Hacer zoom en el punto indicado
                     Toast.makeText(applicationContext, "Ubicación encontrada $location", Toast.LENGTH_LONG).show()
                     val marker = Marker(map)
                     marker.position = location
                     marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                     map.overlays.add(marker)
-                    val location1 = GeoPoint(location.latitude, location.longitude)
-                    lastMarker = location1
+                    lastMarker = location
                     if (lastLocation != null) {
-                        drawRoute(lastLocation, lastMarker)
+                        val initialLatitude = 4.62894444
+                        val initialLongitude = -74.06485
+                        val initialGeoPoint = GeoPoint(initialLatitude, initialLongitude)
+                        drawRoute(initialGeoPoint, lastMarker)
                     }
                 }
                 // Aquí puedes agregar lo que deseas hacer cuando se presione Enter, como realizar una búsqueda
@@ -189,7 +221,23 @@ class RutaActivity : AppCompatActivity() {
                 false // Devolver 'false' para dejar que el sistema maneje el evento
             }
         }
+    }*/
+
+    override fun onResume() {
+        super.onResume()
+        map.onResume()
+
+        mGeocoder = Geocoder(baseContext)
+
+        val mapController: IMapController = map.controller
+        mapController.setZoom(18.0)
+
+        //Cambiar de OSCURO -> CLARO o CLARO -> OSCURO
+        val uiManager = getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+        if(uiManager.nightMode == UiModeManager.MODE_NIGHT_YES)
+            map.overlayManager.tilesOverlay.setColorFilter(TilesOverlay.INVERT_COLORS)
     }
+
     private fun getLocationFromText(text: String): GeoPoint? {
         val coder = Geocoder(this)
         val addressList: List<Address>?

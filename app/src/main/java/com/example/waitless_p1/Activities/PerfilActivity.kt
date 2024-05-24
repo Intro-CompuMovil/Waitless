@@ -1,4 +1,4 @@
-package com.example.waitless_p1
+package com.example.waitless_p1.Activities
 
 import android.app.Activity
 import android.content.ContentValues
@@ -10,14 +10,15 @@ import android.provider.MediaStore
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.waitless_p1.Data.Datos
+import com.example.waitless_p1.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -29,12 +30,22 @@ class PerfilActivity : AppCompatActivity() {
     private var photoURI: Uri? = null
     private lateinit var imagePickerLauncher: ActivityResultLauncher<String>
     private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
+    //Authentication
+    private lateinit var auth: FirebaseAuth
+    override fun onStart() {
+        super.onStart()
+        auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        updateUI(currentUser)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
         findViewById<Button>(R.id.cerrarSesion).setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            auth.signOut()
+            updateUI(null)
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -80,6 +91,16 @@ class PerfilActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun updateUI(currentUser: FirebaseUser?) {
+        if (currentUser == null) {
+            // Navigate to the login activity
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun openGallery() {
