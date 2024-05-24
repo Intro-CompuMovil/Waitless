@@ -9,11 +9,19 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
+import com.example.waitless_p1.Data.Atraccion
 import com.example.waitless_p1.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class HomeActivity : AppCompatActivity() {
 
     var item: String? = null
+    private lateinit var auth: FirebaseAuth
+    private val database = FirebaseDatabase.getInstance()
+    private lateinit var myRef: DatabaseReference
+    val PATH_USERS="users/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +64,20 @@ class HomeActivity : AppCompatActivity() {
                 id: Long
             ) {
                 item = parentView.getItemAtPosition(position).toString()
+                val currentUser = auth.currentUser
+                if (currentUser != null) {
+                    myRef = database.getReference(PATH_USERS+currentUser.uid)
+                }
+                myRef.get().addOnSuccessListener { dataSnapshot ->
+                    // Obtiene el usuario actual de la base de datos
+                    val atraccion = dataSnapshot.getValue(Atraccion::class.java)
+                    atraccion?.let {
+                        // Cambia el estado del usuario
+                        it.estado = !it.estado
+                        // Actualiza el estado del usuario en la base de datos
+                        myRef.setValue(it)
+                    }
+                }
                 // Aquí puedes agregar el código que deseas ejecutar cuando se selecciona un elemento del spinner
             }
 
