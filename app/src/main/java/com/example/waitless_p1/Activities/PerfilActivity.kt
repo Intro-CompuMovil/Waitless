@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import com.example.waitless_p1.Data.Datos
 import com.example.waitless_p1.Data.Usuario
 import com.example.waitless_p1.R
@@ -24,6 +25,7 @@ import com.example.waitless_p1.databinding.ActivityPerfilBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -31,6 +33,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.storage
+import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -49,14 +54,8 @@ class PerfilActivity : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance()
     private lateinit var myRef: DatabaseReference
     val PATH_USERS="users/"
-
-    override fun onStart() {
-        super.onStart()
-        auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-        loadUser()
-    }
+    //Storage
+    private lateinit var storage: FirebaseStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +63,12 @@ class PerfilActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         cameraExecutor = Executors.newSingleThreadExecutor()
+
+        auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        updateUI(currentUser)
+        storage = Firebase.storage("gs://waitless-5a296.appspot.com")
+        loadUser()
 
 
         binding.buttonSelectImage.setOnClickListener {
@@ -93,6 +98,11 @@ class PerfilActivity : AppCompatActivity() {
                     binding.imageViewContact.setImageURI(it)
                 }
             }
+        }
+
+        binding.guardar.setOnClickListener {
+
+            
         }
 
         binding.cerrarSesion.setOnClickListener {
@@ -208,12 +218,26 @@ class PerfilActivity : AppCompatActivity() {
                     binding.telefono.setText(user.telefono)
                     binding.nombre.setText(user.nombre)
                     binding.apellido.setText(user.apellido)
+                    if(user.profileImgUrl != ""){
+                        downloadProfileImage(user.profileImgUrl)
+                    }
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.w("LOAD_USER", "error en la consulta", databaseError.toException())
             }
         })
+    }
+
+    private fun downloadProfileImage(profileImageName: String){
+        val localFile = File.createTempFile("images", "jpg")
+        val imageRef = storage.reference.child("images/profile/${auth.currentUser?.uid}/$profileImageName")
+        imageRef.getFile(localFile).addOnSuccessListener { taskSnapshot ->
+                binding.imageViewContact.setImageURI(Uri.fromFile(localFile))
+                Log.i("DownloadFile", "Successfully downloaded image")
+            }.addOnFailureListener { exception ->
+                Log.e("DownloadFile", "Error downloading image", exception)
+            }
     }
 
     override fun onDestroy() {
