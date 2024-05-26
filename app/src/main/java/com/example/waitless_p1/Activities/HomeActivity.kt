@@ -48,6 +48,17 @@ class HomeActivity : AppCompatActivity() {
         }
 
         val parques = findViewById<Spinner>(R.id.parques)
+        val botonMapa = findViewById<Button>(R.id.rutaParque)
+
+        botonMapa.setOnClickListener {
+            val item = parques.selectedItem.toString()
+            val intent = Intent(this, RutaActivity::class.java)
+            intent.putExtra("parqueSeleccionado", item)
+            startActivity(intent)
+        }
+
+        /*
+        val parques = findViewById<Spinner>(R.id.parques)
         parques.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parentView: AdapterView<*>,
@@ -65,7 +76,7 @@ class HomeActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.rutaParque).setOnClickListener{
             startActivity(Intent(this, PermisoRutaActivity::class.java).putExtra("nombre", item.toString()))
-        }
+        }*/
 
     }
 

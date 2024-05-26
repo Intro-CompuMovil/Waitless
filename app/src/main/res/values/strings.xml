@@ -33,6 +33,11 @@
         <item>Entrada VIP</item>
         <item>Entrada PRO</item>
     </string-array>
+    <string-array name="Parques">
+        <item>Salitre Magico</item>
+        <item>Mundo Aventura</item>
+        <item>Jaime Duque</item>
+    </string-array>
     <string name="listAtrac">Lista Atracciones:</string>
     <string name="escanearNFC">Sensor NFC</string>
     <string name="cancRes">Cancelar Reserva</string>
