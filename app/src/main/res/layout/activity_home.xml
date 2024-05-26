@@ -145,7 +145,7 @@
             android:layout_below="@id/contenido"
             android:background="@color/Grey"
             android:layout_marginTop="20dp"
-            android:entries="@array/nombresParques"
+            android:entries="@array/Parques"
             />
 
         <Button

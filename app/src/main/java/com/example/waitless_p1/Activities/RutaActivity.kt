@@ -69,13 +69,16 @@ class RutaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ruta)
 
+        val intentRecibir = intent
+        val buscarParque = intentRecibir.getStringExtra("parqueSeleccionado")
+
         var search = findViewById<EditText>(R.id.editText)
         var parque = intent.getStringExtra("nombre")
 
         roadManager = OSRMRoadManager(this, "ANDROID")
         //SearchService(search)
-        if (parque != null) {
-            SearchService(parque)
+        if (buscarParque != null) {
+            SearchService(buscarParque)
         }
         Configuration.getInstance().setUserAgentValue(org.osmdroid.library.BuildConfig.BUILD_TYPE)
         map = findViewById(R.id.osmMap)
