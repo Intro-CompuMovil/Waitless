@@ -6,7 +6,6 @@ import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.EditText
 import android.widget.Toast
 import org.json.JSONArray
 import org.osmdroid.api.IMapController
@@ -72,8 +71,6 @@ class RutaActivity : AppCompatActivity() {
         val intentRecibir = intent
         val buscarParque = intentRecibir.getStringExtra("parqueSeleccionado")
 
-        var search = findViewById<EditText>(R.id.editText)
-        var parque = intent.getStringExtra("nombre")
 
         roadManager = OSRMRoadManager(this, "ANDROID")
         //SearchService(search)
