@@ -132,7 +132,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun abrirDetalles(atraccion: Atraccion) {
         val intent = Intent(this, CrearReservaActivity::class.java)
-        intent.putExtra("Atraccion", atraccion.aNombre)
+        intent.putExtra("parque", atraccion.parque)
+        intent.putExtra("atraccion", atraccion.aNombre)
+        Log.d("HomeActivity", "Parque: ${atraccion.parque}, Atracción: ${atraccion.aNombre}")
+
         startActivity(intent)
     }
+
 }

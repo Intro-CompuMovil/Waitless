@@ -2,6 +2,7 @@ package com.example.waitless_p1.Activities
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,9 @@ class AdapterActivity(
 
             button1.setOnClickListener {
                 val intent = Intent(context, CrearReservaActivity::class.java)
-                intent.putExtra("atraccionId", atraccion.aId)
+                intent.putExtra("parque", atraccion.parque)
+                intent.putExtra("atraccion", atraccion.aNombre)
+                Log.d("AdapterActivity", "Parque: ${atraccion.parque}, Atracción: ${atraccion.aNombre}")
                 context.startActivity(intent)
             }
         }
