@@ -1,0 +1,46 @@
+{
+  "parques" :{
+    "0" : {
+      "latitude" : 4.6636,
+      "longitude" : -74.0937,
+      "name" : "Salitre Mágico"
+    },
+    "1" : {
+      "latitude" :  4.6953,
+      "longitude" : -74.0413,
+      "name" : "Multiparque"
+    },
+    "2" : {
+      "latitude" : 4.6098,
+      "longitude" : -74.1295,
+      "name" : "Mundo aventura"
+    },
+    "3" : {
+      "latitude" : 4.9934,
+      "longitude" : -73.9540,
+      "name" : "Jaime Duque"
+    }
+  },
+  "parquesArray" :[
+    {
+      "latitude" : 4.6636,
+      "longitude" : -74.0937,
+      "name" : "Salitre Mágico"
+    },
+    {
+      "latitude" :  4.6953,
+      "longitude" : -74.0413,
+      "name" : "Multiparque"
+    },
+    {
+      "latitude" : 4.6098,
+      "longitude" : -74.1295,
+      "name" : "Mundo aventura"
+    },
+    {
+      "latitude" : 4.9934,
+      "longitude" : -73.9540,
+      "name" : "Jaime Duque"
+    }
+  ]
+}
