@@ -116,7 +116,7 @@
     <RelativeLayout
         android:id = "@+id/contenedor"
         android:layout_width="match_parent"
-        android:layout_height="530dp"
+        android:layout_height="550dp"
         android:layout_below="@id/franjaSuperior"
         android:padding="30dp">
 
@@ -141,10 +141,11 @@
             />
 
         <TextView
-            android:id="@+id/escoAtraccion"
+            android:id="@+id/escoParque"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/escAtra"
+            android:text="Parque: "
+            android:textStyle="bold"
             android:textSize="20sp"
             android:layout_below="@+id/blanco"
             />
@@ -153,10 +154,11 @@
             android:id="@+id/tipoAtraccion"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="@string/nombre_atraccion"
+            android:text="Atracción: "
+            android:textStyle="bold"
             android:textSize="20sp"
             android:paddingTop="10dp"
-            android:layout_below="@+id/escoAtraccion"
+            android:layout_below="@+id/escoParque"
             />
 
         <TextView
@@ -202,13 +204,7 @@
             android:layout_below="@+id/blanco3"
             />
 
-        <ImageView
-            android:id="@+id/imagenReservaHora"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_below="@+id/horayDia"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bookly" />
+
 
         <TextView
             android:id="@+id/numReserva"
@@ -216,7 +212,7 @@
             android:layout_height="wrap_content"
             android:text="@string/numerRes"
             android:textSize="20sp"
-            android:layout_below="@+id/imagenReservaHora"
+            android:layout_below="@+id/calendarView"
             />
 
         <TextView
@@ -228,6 +224,21 @@
             android:text=" A32"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="236dp"
+            android:layout_height="208dp"
+            android:layout_below="@id/horayDia"
+            android:layout_centerHorizontal="true"/>
+
+        <TextClock
+            android:id="@+id/textClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/blanco3"
+            android:textSize="16sp"
+            android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
 

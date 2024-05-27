@@ -6,4 +6,6 @@ class Usuario {
     var apellido = ""
     var telefono = ""
     var profileImgUrl = ""
+    var latitud = 0.0
+    var longitud = 0.0
 }

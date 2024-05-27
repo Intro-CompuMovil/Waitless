@@ -114,7 +114,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="509dp"
+        android:layout_height="590dp"
         android:layout_below="@+id/franjaSuperior"
         android:padding="30dp">
 
@@ -158,50 +158,16 @@
             android:text="@string/ruta"
             android:layout_marginTop="20dp"/>
 
-        <RelativeLayout
-            android:id="@+id/atraccionIndividual"
-            android:layout_width="141dp"
-            android:layout_height="214dp"
+        <LinearLayout
+            android:id="@+id/recyclerViewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/atracciones"
-            android:layout_marginTop="20dp"
-            android:background="@color/Grey"
-            android:padding="10dp">
-
-
-            <TextView
-                android:id="@+id/nombreAtraccion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Apocalipsis"
-                android:layout_above="@id/botonReserva"
-                android:layout_marginBottom="15dp"
-                android:textSize="15sp"
-                android:layout_centerHorizontal="true"/>
-
-            <Button
-                android:id="@+id/botonReserva"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/red"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:text="@string/reservar"
-                android:layout_marginBottom="10dp"/>
-
-            <ImageView
-                android:id="@+id/imagenAtraccion"
-                android:layout_width="124dp"
-                android:layout_height="81dp"
-                android:layout_above="@id/nombreAtraccion"
-                android:layout_marginBottom="10dp"
-                android:src = "@drawable/apocalipsis"/>
-
-        </RelativeLayout>
-
-
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            />
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>
