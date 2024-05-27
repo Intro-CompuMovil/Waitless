@@ -45,6 +45,7 @@ class PerfilActivity : AppCompatActivity() {
     //Camera and gallery
     private lateinit var cameraExecutor: ExecutorService
     private var selectedImageUri: Uri? = null
+    private var lastProfileImage: String? = ""
     private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
     //Binding
     private lateinit var binding: ActivityPerfilBinding
@@ -101,8 +102,16 @@ class PerfilActivity : AppCompatActivity() {
         }
 
         binding.guardar.setOnClickListener {
-
-            
+            var usuario = Usuario()
+            usuario.uid = auth.currentUser!!.uid
+            usuario.profileImgUrl = selectedImageUri?.lastPathSegment ?: lastProfileImage!!
+            usuario.nombre = binding.nombre.text.toString()
+            usuario.apellido = binding.apellido.text.toString()
+            usuario.telefono = binding.telefono.text.toString()
+            myRef = database.getReference(PATH_USERS+ auth.currentUser!!.uid)
+            myRef.setValue(usuario)
+            uploadFile()
+            Toast.makeText(this, "Datos guardados", Toast.LENGTH_SHORT).show()
         }
 
         binding.cerrarSesion.setOnClickListener {
@@ -218,8 +227,9 @@ class PerfilActivity : AppCompatActivity() {
                     binding.telefono.setText(user.telefono)
                     binding.nombre.setText(user.nombre)
                     binding.apellido.setText(user.apellido)
+                    lastProfileImage = user.profileImgUrl
                     if(user.profileImgUrl != ""){
-                        downloadProfileImage(user.profileImgUrl)
+                        downloadProfileImage()
                     }
                 }
             }
@@ -229,15 +239,30 @@ class PerfilActivity : AppCompatActivity() {
         })
     }
 
-    private fun downloadProfileImage(profileImageName: String){
+    private fun downloadProfileImage(){
         val localFile = File.createTempFile("images", "jpg")
-        val imageRef = storage.reference.child("images/profile/${auth.currentUser?.uid}/$profileImageName")
+        val imageRef = storage.reference.child("images/profile/${auth.currentUser?.uid}/$lastProfileImage")
         imageRef.getFile(localFile).addOnSuccessListener { taskSnapshot ->
                 binding.imageViewContact.setImageURI(Uri.fromFile(localFile))
                 Log.i("DownloadFile", "Successfully downloaded image")
             }.addOnFailureListener { exception ->
                 Log.e("DownloadFile", "Error downloading image", exception)
             }
+    }
+
+    private fun uploadFile() {
+        if (selectedImageUri != null) {
+            val imageRef = storage.reference.child("images/profile/${auth.currentUser?.uid}/${selectedImageUri?.lastPathSegment}")
+            imageRef.putFile(selectedImageUri!!)
+                .addOnSuccessListener { taskSnapshot ->
+                    Log.i("FBApp", "Successfully uploaded image")
+                }
+                .addOnFailureListener { exception ->
+                    Log.e("FBApp", "Failed to upload image", exception)
+                }
+        } else {
+            Log.e("FBApp", "No image selected")
+        }
     }
 
     override fun onDestroy() {

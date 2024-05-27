@@ -1,7 +1,10 @@
 package com.example.waitless_p1.Activities
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.UiModeManager
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,8 +33,13 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.location.Address
+import android.location.Location
 import android.location.LocationManager
+import androidx.core.app.ActivityCompat
+import com.example.waitless_p1.Data.Datos.Companion.MY_PERMISSION_REQUEST_LOCATION
 import com.example.waitless_p1.R
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -47,58 +55,95 @@ import kotlin.math.roundToInt
 
 class RutaActivity : AppCompatActivity() {
 
-    private lateinit var locationManager: LocationManager
-    private var latitud: Double = 0.0
-    private var longitud: Double = 0.0
-    private var altitud: Double = 0.0
-    private var lastLocation: GeoPoint = GeoPoint(latitud, longitud)
-    private lateinit var lastLocation1: MyLocationNewOverlay
-    var check: Boolean = false
     private lateinit var map: MapView
     private var mGeocoder: Geocoder? = null
-    private lateinit var locationOverlay: MyLocationNewOverlay
     private lateinit var sensorManager: SensorManager
     private var lightSensor: Sensor? = null
-    private var lightSensorListener: SensorEventListener? = null
-    private var lastMarker: GeoPoint = GeoPoint(latitud, longitud)
     lateinit var roadManager: RoadManager
     private var roadOverlay: Polyline? = null
+    //Location permissions
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var myLocation: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ruta)
 
-        val intentRecibir = intent
-        val buscarParque = intentRecibir.getStringExtra("parqueSeleccionado")
+        // Inicializar el cliente de ubicación fusionada
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-
-        roadManager = OSRMRoadManager(this, "ANDROID")
-        //SearchService(search)
-        if (buscarParque != null) {
-            SearchService(buscarParque)
-        }
+        //Configurar mapa
         Configuration.getInstance().setUserAgentValue(org.osmdroid.library.BuildConfig.BUILD_TYPE)
         map = findViewById(R.id.osmMap)
         map.setTileSource(TileSourceFactory.MAPNIK)
         map.setBuiltInZoomControls(true)
         map.setMultiTouchControls(true)
-        map.setMultiTouchControls(true)
 
-        val initialLatitude = 4.62894444
-        val initialLongitude = -74.06485
-        val initialGeoPoint = GeoPoint(initialLatitude, initialLongitude)
-        val mapController: IMapController = map.controller
-        mapController.setCenter(initialGeoPoint)
-        mapController.setZoom(15.0)
+        // Revisar permisos
+        checkLocationPermission()
 
-        val startGeoPoint = GeoPoint(4.62894444, -74.06485)
-        val destinationGeoPoint = GeoPoint(34.0522, -118.2437) // Los Angeles
-        drawRoute(startGeoPoint, destinationGeoPoint)
+        roadManager = OSRMRoadManager(this, "ANDROID")
 
-        map.controller.setZoom(15.0)
         setUpSensorStuff()
-        map.overlays.add(createOverlayEvents())
 
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == MY_PERMISSION_REQUEST_LOCATION){// Nuestros permisos
+            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){ // Validar que si se aceptaron ambos permisos
+                // Permisos aceptados
+                setMyLocation()
+            }else{
+                //El permiso no ha sido aceptado
+                Toast.makeText(this, "Permisos denegados :(", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun setMyLocation() {
+        // Crear una solicitud de ubicación
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location ->
+                if (location != null) {
+                    myLocation = location
+                    val intentRecibir = intent
+                    val buscarParque = intentRecibir.getStringExtra("parqueSeleccionado")
+                    if (buscarParque != null) {
+                        drawPointsAndRouteToPark(buscarParque)
+                    }
+                }
+            }
+    }
+
+    private fun checkLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Si no tienes permisos, solicitarlos al usuario
+            requestLocationPermission()
+        } else {
+            // Si tienes permisos
+            // Get the last known location
+            setMyLocation()
+
+        }
+    }
+
+    private fun requestLocationPermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)){
+            //El usuario ya ha rechazado los permisos
+            Toast.makeText(this, "Permisos denegados :(", Toast.LENGTH_SHORT).show()
+        }else{
+            //Pedir permisos
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSION_REQUEST_LOCATION)
+        }
     }
 
     private fun drawRoute(start: GeoPoint, finish: GeoPoint) {
@@ -116,10 +161,10 @@ class RutaActivity : AppCompatActivity() {
                     roadOverlay?.outlinePaint?.color = Color.RED
                     roadOverlay?.outlinePaint?.strokeWidth = 10f
                     map.overlays.add(roadOverlay)
-                    val distance = start.distanceToAsDouble(finish)
+                    val distance =  String.format("%.2f", start.distanceToAsDouble(finish) / 1000)
                     Toast.makeText(
                         this@RutaActivity,
-                        "La distancia entre los puntos son : $distance metros",
+                        "La distancia hasta el parque es: $distance km",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -127,101 +172,26 @@ class RutaActivity : AppCompatActivity() {
         }
     }
 
-    private fun createOverlayEvents(): MapEventsOverlay {
-        val overlayEventos = MapEventsOverlay(object : MapEventsReceiver {
-            override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
-                return false
-            }
-
-            override fun longPressHelper(p: GeoPoint): Boolean {
-                longPressOnMap(p)
-                return true
-            }
-        })
-        return overlayEventos
-    }
-
-    private fun longPressOnMap(p: GeoPoint) {
-        val coder = Geocoder(this)
-        val addresses: List<Address>?
-        addresses = coder.getFromLocation(p.latitude, p.longitude, 1)
-        if (addresses!!.isNotEmpty()) {
-            val address = addresses[0]
-            val mapController = map.controller
-            mapController.setCenter(p)
-            mapController.setZoom(15.0)
-            val marker = Marker(map)
-            marker.position = p
-            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-            marker.title = address.getAddressLine(0)
-            map.overlays.add(marker)
-            lastMarker = p
-            if (lastLocation != null) {
-                drawRoute(lastLocation, lastMarker)
-            }
-        }
-    }
-
-    private fun SearchService(parque: String) {
+    private fun drawPointsAndRouteToPark(parque: String) {
         val location = getLocationFromText(parque)
-        Toast.makeText(applicationContext, parque, Toast.LENGTH_SHORT).show()
         if (location != null) {
-            val mapController = map.controller
-            mapController.setCenter(location)
-            mapController.setZoom(15.0) // Hacer zoom en el punto indicado
-            Toast.makeText(applicationContext, "Ubicación encontrada $location", Toast.LENGTH_LONG)
-                .show()
             val marker = Marker(map)
-            marker.position = location
+            marker.position = GeoPoint(location.latitude, location.longitude)
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
             map.overlays.add(marker)
-            lastMarker = location
-            if (lastLocation != null) {
-                val initialLatitude = 4.62894444
-                val initialLongitude = -74.06485
-                val initialGeoPoint = GeoPoint(initialLatitude, initialLongitude)
-                drawRoute(initialGeoPoint, lastMarker)
-            }
-        }
-        // Aquí puedes agregar lo que deseas hacer cuando se presione Enter, como realizar una búsqueda
 
+            val mylocation = GeoPoint(myLocation!!.latitude, myLocation!!.longitude)
+            val mapController: IMapController = map.controller
+            mapController.setCenter(mylocation)
+            mapController.setZoom(14.0)
+            val myLocationMarker = Marker(map)
+            myLocationMarker.position = mylocation
+            myLocationMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            map.overlays.add(myLocationMarker)
+
+            drawRoute(mylocation, location)
+        }
     }
-
-    /*private fun SearchService(search: EditText){
-        search.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                event?.action == KeyEvent.ACTION_DOWN &&
-                event.keyCode == KeyEvent.KEYCODE_ENTER) {
-                // Manejar el evento Enter aquí
-                // Por ejemplo, puedes cerrar el teclado:
-                val text = search.text.toString()
-                if(text.isEmpty()){
-                }
-                val location = getLocationFromText(text)
-                if (location != null) {
-                    val mapController = map.controller
-                    mapController.setCenter(location)
-                    mapController.setZoom(15.0) // Hacer zoom en el punto indicado
-                    Toast.makeText(applicationContext, "Ubicación encontrada $location", Toast.LENGTH_LONG).show()
-                    val marker = Marker(map)
-                    marker.position = location
-                    marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                    map.overlays.add(marker)
-                    lastMarker = location
-                    if (lastLocation != null) {
-                        val initialLatitude = 4.62894444
-                        val initialLongitude = -74.06485
-                        val initialGeoPoint = GeoPoint(initialLatitude, initialLongitude)
-                        drawRoute(initialGeoPoint, lastMarker)
-                    }
-                }
-                // Aquí puedes agregar lo que deseas hacer cuando se presione Enter, como realizar una búsqueda
-                true // Devolver 'true' para indicar que has manejado el evento
-            } else {
-                false // Devolver 'false' para dejar que el sistema maneje el evento
-            }
-        }
-    }*/
 
     override fun onResume() {
         super.onResume()
@@ -254,109 +224,9 @@ class RutaActivity : AppCompatActivity() {
         }
         return null
     }
-    private fun setupLocationOverlay(mapController: IMapController) {
-        val locationProvider = GpsMyLocationProvider(this)
-        locationOverlay = MyLocationNewOverlay(locationProvider, map)
-        locationOverlay.enableMyLocation()
-        locationOverlay.enableFollowLocation()
-
-        locationOverlay.runOnFirstFix { runOnUiThread {
-
-            if (locationOverlay.myLocation != null) {
-                if (!check) {
-                    check = true
-                    val currentLocation = locationOverlay.myLocation
-                    val latitude = currentLocation.latitude
-                    val longitude = currentLocation.longitude
-                    lastLocation = GeoPoint(latitude, longitude)
-                    lastLocation1 = locationOverlay
-                    map.overlays.add(locationOverlay)
-                    mapController.setZoom(15.0)
-                    mapController.setCenter(locationOverlay.myLocation)
-                    // Now you can use latitude and longitude
-                }
-                else{
-                    val currentLocation = locationOverlay.myLocation
-                    val latitude = currentLocation.latitude
-                    val longitude = currentLocation.longitude
-                    if (calculateDistance(lastLocation.latitude, lastLocation.longitude, latitude, longitude) > 30) {
-                        lastLocation = GeoPoint(latitude, longitude)
-                        lastLocation1 = locationOverlay
-                        map.overlays.add(locationOverlay)
-                        mapController.setCenter(locationOverlay.myLocation)
-                        val currentDate = Date()
-                        val myLocation = MyLocation(currentDate, latitude, longitude)
-                        writeJSONObject(myLocation)
-                    }
-                    else{
-                        Toast.makeText(applicationContext, "Movimiento menor a  30m ", Toast.LENGTH_LONG).show()
-                        map.overlays.add(lastLocation1)
-                    }
-                }
-            }
-        }}
-    }
-    private fun calculateDistance(lat1: Double, long1: Double, lat2: Double, long2: Double): Double {
-        val RADIUS_OF_EARTH_KM = 6371.0
-        val latDistance = Math.toRadians(lat1 - lat2)
-        val lngDistance = Math.toRadians(long1 - long2)
-        val a = (Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2))
-        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-        val result = RADIUS_OF_EARTH_KM * c *1000
-        return (result * 100.0).roundToInt() / 100.0
-    }
-    class MyLocation(var fecha: Date, var latitud: Double, var longitud: Double) {
-        fun toJSON(): JSONObject {
-            val obj = JSONObject()
-            try {
-                obj.put("latitud", latitud)
-                obj.put("longitud", longitud)
-                obj.put("date", fecha)
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-            return obj
-        }
-    }
-
-    private fun readJSONArrayFromFile(fileName: String): JSONArray {
-        val file = File(baseContext.getExternalFilesDir(null), fileName)
-        if (!file.exists()) {
-            return JSONArray()
-        }
-        val jsonString = file.readText()
-        return JSONArray(jsonString)
-    }
-
-    private fun writeJSONObject(location: MyLocation) {
-        val localizaciones = readJSONArrayFromFile("locations.json")
-        localizaciones.put(location.toJSON())
-        var output: Writer?
-        val filename = "locations.json"
-        try {
-            val file = File(baseContext.getExternalFilesDir(null), filename)
-            output = BufferedWriter(FileWriter(file))
-            output.write(localizaciones.toString())
-            output.close()
-            Toast.makeText(applicationContext, "Location saved", Toast.LENGTH_LONG).show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
 
     private fun setUpSensorStuff() {
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
-    }
-    private fun onSensorChanged(event: SensorEvent?) {
-        if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
-            if (event.values[0] < 10.0) {
-                map.overlayManager.tilesOverlay.setColorFilter(TilesOverlay.INVERT_COLORS)
-            } else {
-                map.overlayManager.tilesOverlay.setColorFilter(null)
-            }
-        }
     }
 }
