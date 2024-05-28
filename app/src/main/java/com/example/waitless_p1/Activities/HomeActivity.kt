@@ -23,6 +23,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var recyclerViewContainer: LinearLayout
     private lateinit var atraccionesPorParque: List<List<Atraccion>>
+    private lateinit var parqueSeleccionado: String
     private val recyclerViews = mutableListOf<RecyclerView>()
     private val adapters = mutableListOf<AdapterActivity>()
     private var item: String? = null
@@ -50,6 +51,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setupUIComponents() {
         findViewById<Button>(R.id.rutaParque).setOnClickListener {
             startActivity(Intent(this, PermisoRutaActivity::class.java))
+            pasarParque()
         }
         findViewById<ImageButton>(R.id.iconoReserva).setOnClickListener {
             startActivity(Intent(this, ReservasActivity::class.java))
@@ -83,6 +85,7 @@ class HomeActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
+                parqueSeleccionado = parentView.getItemAtPosition(position).toString()
                 item = parentView.getItemAtPosition(position).toString()
                 val currentUser = auth.currentUser
                 if (currentUser != null) {
@@ -103,6 +106,13 @@ class HomeActivity : AppCompatActivity() {
                 // Handle when nothing is selected
             }
         }
+    }
+
+    private fun pasarParque(){
+        val intent = Intent(this, RutaActivity::class.java).apply {
+            putExtra("parque", parqueSeleccionado)
+        }
+        startActivity(intent)
     }
 
     private fun actualizarRecyclerViews(atracciones: List<Atraccion>) {
