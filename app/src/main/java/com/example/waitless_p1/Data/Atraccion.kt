@@ -4,6 +4,11 @@ class Atraccion {
     var aId = 0
     var parque = ""
     var aNombre = ""
+    var descripcion = ""
     var estado: Boolean = true
-    var imgUrl = ""
+    var tipo = ""
+    var capacidad = 0
+    var estaturaMinima = 0
+    var estaturaMaxima = 0
+    var nivelIntensidad = ""
 }

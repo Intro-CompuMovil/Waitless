@@ -18,147 +18,192 @@
         android:background="#FFFFFF"
         android:scaleType="fitCenter"
         android:src="@drawable/exit_button"
-        app:tint="@color/red"
-        android:hint="Este es el botón de cerrar"
-        android:contentDescription="Este botón sirve para cerrar pantalla"/>
+        app:tint="@color/red" />
 
-    <ImageView
-        android:id="@+id/imagenAtraccion"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:src="@drawable/apocalipsis_01"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/exitbutton2"/>
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:paddingHorizontal="20dp"
-        android:layout_below="@+id/imagenAtraccion">
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-        <TextView
-            android:id="@+id/tituloAtraccion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Apocalipsis"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"/>
+        <ImageView
+            android:id="@+id/imagenAtraccion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_weight="1"
+            />
 
-        <TextView
-            android:id="@+id/descripcionAtraccionInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="¡Prepárate para dar vueltas de 360 grados con máxima velocidad y gritos de emoción!"
-            android:textAlignment="center"
-            android:layout_below="@id/tituloAtraccion"
-            android:layout_marginVertical="10dp"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="40dp"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tituloAtraccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apocalipsis"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"/>
 
-        <TextView
-            android:id="@+id/tipoAtraccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tipo de atracción: "
-            android:textStyle="bold"
-            android:layout_below="@id/descripcionAtraccionInfo" />
+            <TextView
+                android:id="@+id/descripcionAtraccionInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="¡Prepárate para dar vueltas de 360 grados con máxima velocidad y gritos de emoción!"
+                android:textAlignment="center"
+                android:layout_marginVertical="10dp"/>
 
-        <TextView
-            android:id="@+id/tipoAtraccionInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tipoAtraccion"
-            android:text="Alto impacto"
-            android:layout_below="@id/descripcionAtraccionInfo" />
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="6"
+                android:layout_gravity="center">
 
-        <TextView
-            android:id="@+id/estadoAtraccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Estado: "
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/tipoAtraccion" />
+                <TextView
+                    android:id="@+id/tipoAtraccion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de atracción: "
+                    android:textStyle="bold"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:textSize="18sp"
+                    android:layout_columnWeight="1" />
 
-        <TextView
-            android:id="@+id/estadoAtraccionInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Abierto"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@id/estadoAtraccion"
-            android:layout_below="@id/tipoAtraccionInfo" />
+                <TextView
+                    android:id="@+id/tipoAtraccionInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Alto impacto"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:textSize="18sp"
+                    android:layout_columnWeight="1" />
 
-        <TextView
-            android:id="@+id/capacidadAtraccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Capacidad: "
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/estadoAtraccion" />
+                <TextView
+                    android:id="@+id/estadoAtraccion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Estado: "
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_column="0"
+                    android:layout_row="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
 
-        <TextView
-            android:id="@+id/capacidadAtraccionInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="45 personas"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@id/capacidadAtraccion"
-            android:layout_below="@id/estadoAtraccionInfo" />
+                <TextView
+                    android:id="@+id/estadoAtraccionInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Abierto"
+                    android:textSize="18sp"
+                    android:layout_column="1"
+                    android:layout_row="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
 
-        <TextView
-            android:id="@+id/estaturaMinAtraccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Estatura mínima: "
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/capacidadAtraccion" />
-        <TextView
-            android:id="@+id/estaturaMinAtraccionInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="145 cm"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@id/estaturaMinAtraccion"
-            android:layout_below="@id/capacidadAtraccionInfo" />
+                <TextView
+                    android:id="@+id/capacidadAtraccion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Capacidad: "
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_column="0"
+                    android:layout_row="2"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
 
-        <TextView
-            android:id="@+id/estaturaMaxAtraccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Estatura máxima: "
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/estaturaMinAtraccion" />
+                <TextView
+                    android:id="@+id/capacidadAtraccionInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="45 personas"
+                    android:textSize="18sp"
+                    android:layout_column="1"
+                    android:layout_row="2"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
 
-        <TextView
-            android:id="@+id/estaturaMaxAtraccionInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="N/A"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@id/estaturaMaxAtraccion"
-            android:layout_below="@id/estaturaMinAtraccionInfo" />
+                <TextView
+                    android:id="@+id/estaturaMinAtraccion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Estatura mínima: "
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_column="0"
+                    android:layout_row="3"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
 
-        <TextView
-            android:id="@+id/nivelIntensidadAtraccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Nivel de intensidad: "
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/estaturaMaxAtraccion" />
+                <TextView
+                    android:id="@+id/estaturaMinAtraccionInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="145 cm"
+                    android:textSize="18sp"
+                    android:layout_column="1"
+                    android:layout_row="3"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
 
-        <TextView
-            android:id="@+id/nivelIntensidadAtraccionInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alta"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@id/nivelIntensidadAtraccion"
-            android:layout_below="@id/estaturaMaxAtraccionInfo" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/estaturaMaxAtraccion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Estatura máxima: "
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_column="0"
+                    android:layout_row="4"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:id="@+id/estaturaMaxAtraccionInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="N/A"
+                    android:textSize="18sp"
+                    android:layout_column="1"
+                    android:layout_row="4"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:id="@+id/nivelIntensidadAtraccion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nivel de intensidad: "
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_column="0"
+                    android:layout_row="5"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:id="@+id/nivelIntensidadAtraccionInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Alta"
+                    android:textSize="18sp"
+                    android:layout_column="1"
+                    android:layout_row="5"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="5dp" />
+            </GridLayout>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

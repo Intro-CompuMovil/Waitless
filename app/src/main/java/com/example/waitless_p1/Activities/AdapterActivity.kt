@@ -69,7 +69,7 @@ class AdapterActivity(
         //Storage
         var storage = Firebase.storage("gs://waitless-5a296.appspot.com")
         val localFile = File.createTempFile("images", "jpg")
-        val imageRef = storage.reference.child("images/atracttions/${atracttionId}.jpg")
+        val imageRef = storage.reference.child("images/attractions/${atracttionId}.jpg")
         imageRef.getFile(localFile).addOnSuccessListener { taskSnapshot ->
             profileImage1.setImageURI(Uri.fromFile(localFile))
             Log.i("DownloadFile", "Successfully downloaded image")
