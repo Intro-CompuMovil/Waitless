@@ -48,9 +48,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupUIComponents() {
-        findViewById<Button>(R.id.rutaParque).setOnClickListener {
-            startActivity(Intent(this, PermisoRutaActivity::class.java))
-        }
         findViewById<ImageButton>(R.id.iconoReserva).setOnClickListener {
             startActivity(Intent(this, ReservasActivity::class.java))
         }
@@ -71,6 +68,15 @@ class HomeActivity : AppCompatActivity() {
         }
         findViewById<ImageButton>(R.id.tema).setOnClickListener {
             Toast.makeText(this, "Sensor cambio tema", Toast.LENGTH_LONG).show()
+        }
+
+        val parques = findViewById<Spinner>(R.id.parques)
+        val botonMapa = findViewById<Button>(R.id.rutaParque)
+        botonMapa.setOnClickListener {
+            val item = parques.selectedItem.toString()
+            val intent = Intent(this, RutaActivity::class.java)
+            intent.putExtra("parqueSeleccionado", item)
+            startActivity(intent)
         }
     }
 

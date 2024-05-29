@@ -2,6 +2,7 @@ package com.example.waitless_p1.Activities
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.waitless_p1.Data.Atraccion
 import com.example.waitless_p1.R
+import com.google.firebase.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.storage
 import de.hdodenhof.circleimageview.CircleImageView
+import java.io.File
 
 class AdapterActivity(
     private var atracciones: List<Atraccion>,
@@ -27,6 +32,8 @@ class AdapterActivity(
             // Set the image resource or use a library like Glide or Picasso for URL images
             // profileImage1.setImageResource(atraccion.imgUrl)
             titulo1.text = atraccion.aNombre
+
+            downloadProfileImage(atraccion.aId, profileImage1)
 
             itemView.setOnClickListener { onClick(atraccion) }
 
@@ -56,5 +63,18 @@ class AdapterActivity(
     fun updateData(newAtracciones: List<Atraccion>) {
         atracciones = newAtracciones
         notifyDataSetChanged()
+    }
+
+    private fun downloadProfileImage(atracttionId : Int,  profileImage1: CircleImageView){
+        //Storage
+        var storage = Firebase.storage("gs://waitless-5a296.appspot.com")
+        val localFile = File.createTempFile("images", "jpg")
+        val imageRef = storage.reference.child("images/attractions/${atracttionId}.jpg")
+        imageRef.getFile(localFile).addOnSuccessListener { taskSnapshot ->
+            profileImage1.setImageURI(Uri.fromFile(localFile))
+            Log.i("DownloadFile", "Successfully downloaded image")
+        }.addOnFailureListener { exception ->
+            Log.e("DownloadFile", "Error downloading image", exception)
+        }
     }
 }
