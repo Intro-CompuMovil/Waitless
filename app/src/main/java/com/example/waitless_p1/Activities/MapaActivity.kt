@@ -35,6 +35,18 @@ class MapaActivity : AppCompatActivity() {
         // Obtener la rotación actual de la pantalla y rotar la imagen del mapa
         val display: Display = (getSystemService(WINDOW_SERVICE) as WindowManager).defaultDisplay
         val rotation = display.rotation
+        binding.p1.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 1)) }
+        binding.p2.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 2)) }
+        binding.p4.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 4)) }
+        binding.p5.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 5)) }
+        binding.p6.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 6)) }
+        binding.p7.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 7)) }
+        binding.p8.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 8)) }
+        binding.p9.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 9)) }
+        binding.p10.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 10)) }
+        binding.p18.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 18)) }
+
+        binding.p30.setOnClickListener {startActivity(Intent(this, DetallePuntoActivity::class.java).putExtra("idAtraccion", 30)) }
         //rotateMapImage(rotation)
     }
 
