@@ -13,8 +13,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.waitless_p1.Data.Reserva
 import com.example.waitless_p1.R
+import com.google.firebase.Firebase
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.storage
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.File
 
@@ -31,7 +33,7 @@ class AdapterReservasActivity(
 
         fun bind(reserva: Reserva) {
             fecha.text = reserva.fecha
-            downloadProfileImage(reserva.rAtraccion, profileImage1)
+            downloadProfileImage(reserva.rAId, profileImage1)
 
             detalles.setOnClickListener {
                 val intent = Intent(context, VerReservaActivity::class.java).apply {
@@ -73,15 +75,19 @@ class AdapterReservasActivity(
         notifyDataSetChanged()
     }
 
-    private fun downloadProfileImage(atraccionId: String, profileImage1: CircleImageView) {
-        val storage = FirebaseStorage.getInstance("gs://waitless-5a296.appspot.com")
+    private fun downloadProfileImage(atracttionId : Int,  profileImage1: CircleImageView){
+        //Storage
+        var storage = Firebase.storage("gs://waitless-5a296.appspot.com")
         val localFile = File.createTempFile("images", "jpg")
-        val imageRef = storage.reference.child("images/attractions/$atraccionId.jpg")
-        imageRef.getFile(localFile).addOnSuccessListener {
+
+        val imageRef = storage.reference.child("images/attractions/${atracttionId}.jpg")
+        imageRef.getFile(localFile).addOnSuccessListener { taskSnapshot ->
             profileImage1.setImageURI(Uri.fromFile(localFile))
             Log.i("DownloadFile", "Successfully downloaded image")
         }.addOnFailureListener { exception ->
             Log.e("DownloadFile", "Error downloading image", exception)
         }
+
+
     }
 }

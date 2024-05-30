@@ -1,13 +1,19 @@
 package com.example.waitless_p1.Activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.waitless_p1.Data.Reserva
 import com.example.waitless_p1.R
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
+import de.hdodenhof.circleimageview.CircleImageView
+import java.io.File
 
 class VerReservaActivity : AppCompatActivity() {
 
@@ -64,6 +70,9 @@ class VerReservaActivity : AppCompatActivity() {
         estado.text = if (reserva.rEstado) "Activa" else "Cancelada"
         numero.text = reserva.numero.toString()
 
+        var image = findViewById<ImageView>(R.id.imagenReservaHora)
+        downloadProfileImage(reserva.rAId, image)
+
         // Aquí puedes actualizar la imagen de la reserva si tienes una URL o referencia a la imagen
         // Por ejemplo, si tienes una URL de Firebase Storage:
         // val storageReference = FirebaseStorage.getInstance().reference.child("path/to/image")
@@ -91,6 +100,20 @@ class VerReservaActivity : AppCompatActivity() {
         }
         tema.setOnClickListener {
             // Acción para cambiar tema
+        }
+    }
+
+    private fun downloadProfileImage(atracttionId : Int,  profileImage1: ImageView){
+        //Storage
+        var storage = Firebase.storage("gs://waitless-5a296.appspot.com")
+        val localFile = File.createTempFile("images", "jpg")
+
+        val imageRef = storage.reference.child("images/attractions/${atracttionId}.jpg")
+        imageRef.getFile(localFile).addOnSuccessListener { taskSnapshot ->
+            profileImage1.setImageURI(Uri.fromFile(localFile))
+            Log.i("DownloadFile", "Successfully downloaded image")
+        }.addOnFailureListener { exception ->
+            Log.e("DownloadFile", "Error downloading image", exception)
         }
     }
 }
