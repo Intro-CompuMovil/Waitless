@@ -76,15 +76,17 @@ class CrearReservaActivity : AppCompatActivity() {
             val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date(fecha))
             val hora = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
 
-            val reserva = Reserva()
-            reserva.numero = generateReservationNumber()
-            reserva.rParque = parque
-            reserva.rAtraccion = atraccion
-            reserva.rEstado = true
-            reserva.hora = hora
-            reserva.fecha = formattedDate
-            reserva.asientos = asientos
-            reserva.titular = user.uid
+            val reserva = Reserva(
+                numero = generateReservationNumber(),
+                rParque = parque,
+                rAtraccion = atraccion,
+                rEstado = true,
+                hora = hora,
+                fecha = formattedDate,
+                asientos = asientos,
+                titular = user.uid
+            )
+
 
             val reservasPath = "reservas/${user.uid}/${reserva.numero}"
             myRef = database.getReference(reservasPath)

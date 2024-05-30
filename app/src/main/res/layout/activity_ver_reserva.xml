@@ -240,28 +240,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/titReserva"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/estReserva"
-            android:text="@string/titRes"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/titular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/titReserva"
-            android:layout_alignBaseline="@id/titReserva"
-            android:text="Oscar Martinez"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/numReserva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/titReserva"
+            android:layout_below="@+id/estado"
             android:text="@string/numerRes"
             android:textSize="20sp" />
 

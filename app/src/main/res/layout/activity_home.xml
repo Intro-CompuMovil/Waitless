@@ -158,11 +158,18 @@
             android:text="@string/ruta"
             android:layout_marginTop="20dp"/>
 
+        <Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@id/atracciones"/>
+
         <LinearLayout
             android:id="@+id/recyclerViewContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/atracciones"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/space"
             android:orientation="horizontal"
             android:layout_marginTop="5dp"
             />
