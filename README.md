@@ -9,7 +9,9 @@
 ### Descripción
 Waitless es una solución innovadora diseñada para finalizar con las largas filas en los parques de diversiones
 
-**Acceso a Waitless Admin:** https://github.com/adrianrrruiz/waitless-admin
+**Acceso a repositorio de Waitless Admin:** https://github.com/adrianrrruiz/waitless-admin
+
+**Acceso a Waitless Admin:** https://adrianrrruiz.github.io/waitless-admin/src
 
 ## Contenidos
 - [Integrantes](#integrantes)
