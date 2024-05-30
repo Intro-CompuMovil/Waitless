@@ -46,9 +46,6 @@ class ScanqrActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.iconoPerfil).setOnClickListener{
             startActivity(Intent(this, PerfilActivity::class.java))
         }
-        findViewById<ImageButton>(R.id.tema).setOnClickListener{
-            Toast.makeText(this, "Sensor tema", Toast.LENGTH_LONG).show()
-        }
         findViewById<Button>(R.id.botonOK).setOnClickListener {
             startQRScanner()
         }

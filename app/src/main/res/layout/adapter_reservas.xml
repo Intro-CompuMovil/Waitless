@@ -27,7 +27,7 @@
                 android:id="@+id/imagenAtraccion"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/apocalipsis" />
+                 />
 
             <TextView
                 android:id="@+id/fechaReserva"

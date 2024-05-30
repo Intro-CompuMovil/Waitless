@@ -94,16 +94,6 @@
             />
 
         <EditText
-            android:id="@+id/correo"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_gravity="center_horizontal"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="Correo"
-            />
-
-        <EditText
             android:id="@+id/telefono"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -111,6 +101,16 @@
             android:ems="10"
             android:inputType="text"
             android:hint="Teléfono"
+            />
+
+        <EditText
+            android:id="@+id/correo"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Correo"
             />
 
         <EditText
