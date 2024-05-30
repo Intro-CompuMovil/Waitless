@@ -4,6 +4,7 @@ import java.io.Serializable
 data class Reserva(
     var numero: Int = 0,
     var rParque: String = "",
+    var rAId: Int = 0,
     var rAtraccion: String = "",
     var rEstado: Boolean = false,
     var hora: String = "",
@@ -12,6 +13,6 @@ data class Reserva(
     var titular: String = ""
 ) : Serializable {
     // Constructor sin argumentos necesario para Firebase Database
-    constructor() : this(0, "", "", false, "", "", 0, "")
+    constructor() : this(0, "", 0, "", false, "", "", 0, "")
 }
 

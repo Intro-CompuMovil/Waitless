@@ -135,7 +135,8 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this, CrearReservaActivity::class.java)
         intent.putExtra("parque", atraccion.parque)
         intent.putExtra("atraccion", atraccion.aNombre)
-        Log.d("HomeActivity", "Parque: ${atraccion.parque}, Atracción: ${atraccion.aNombre}")
+        intent.putExtra("idAtraccion", atraccion.aId)
+        Log.d("HomeActivity", "Parque: ${atraccion.parque}, Atracción: ${atraccion.aNombre}, Id: ${atraccion.aId}")
 
         startActivity(intent)
     }

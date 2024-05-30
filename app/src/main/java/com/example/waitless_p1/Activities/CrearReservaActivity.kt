@@ -27,7 +27,8 @@ class CrearReservaActivity : AppCompatActivity() {
 
         val parque = intent.getStringExtra("parque")
         val atraccion = intent.getStringExtra("atraccion")
-        Log.d("CrearReservaActivity", "Parque: $parque, Atracción: $atraccion")
+        val idAtraccion = intent.getIntExtra("idAtraccion", 0)
+        Log.d("CrearReservaActivity", "Parque: $parque, Atracción: $atraccion, idAtracción: $idAtraccion")
 
         if (parque != null && atraccion != null) {
             findViewById<TextView>(R.id.escoParque).text = "Parque: $parque"
@@ -37,7 +38,7 @@ class CrearReservaActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.reservar).setOnClickListener {
-            createReservation(parque, atraccion)
+            createReservation(parque, atraccion, idAtraccion)
         }
 
         setupButtons()
@@ -67,9 +68,9 @@ class CrearReservaActivity : AppCompatActivity() {
         }
     }
 
-    private fun createReservation(parque: String?, atraccion: String?) {
+    private fun createReservation(parque: String?, atraccion: String?, idAtraccion: Int?) {
         val user = auth.currentUser
-        if (user != null && parque != null && atraccion != null) {
+        if (user != null && parque != null && atraccion != null && idAtraccion != null) {
             val spinner = findViewById<Spinner>(R.id.numPuestos)
             val asientos = spinner.selectedItem.toString().toInt()
             val fecha = findViewById<CalendarView>(R.id.calendarView).date
@@ -80,6 +81,7 @@ class CrearReservaActivity : AppCompatActivity() {
                 numero = generateReservationNumber(),
                 rParque = parque,
                 rAtraccion = atraccion,
+                rAId = idAtraccion,
                 rEstado = true,
                 hora = hora,
                 fecha = formattedDate,
