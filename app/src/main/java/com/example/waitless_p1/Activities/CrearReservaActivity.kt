@@ -27,7 +27,8 @@ class CrearReservaActivity : AppCompatActivity() {
 
         val parque = intent.getStringExtra("parque")
         val atraccion = intent.getStringExtra("atraccion")
-        Log.d("CrearReservaActivity", "Parque: $parque, Atracción: $atraccion")
+        val idAtraccion = intent.getIntExtra("idAtraccion", 0)
+        Log.d("CrearReservaActivity", "Parque: $parque, Atracción: $atraccion, idAtracción: $idAtraccion")
 
         if (parque != null && atraccion != null) {
             findViewById<TextView>(R.id.escoParque).text = "Parque: $parque"
@@ -37,7 +38,7 @@ class CrearReservaActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.reservar).setOnClickListener {
-            createReservation(parque, atraccion)
+            createReservation(parque, atraccion, idAtraccion)
         }
 
         setupButtons()
@@ -67,24 +68,27 @@ class CrearReservaActivity : AppCompatActivity() {
         }
     }
 
-    private fun createReservation(parque: String?, atraccion: String?) {
+    private fun createReservation(parque: String?, atraccion: String?, idAtraccion: Int?) {
         val user = auth.currentUser
-        if (user != null && parque != null && atraccion != null) {
+        if (user != null && parque != null && atraccion != null && idAtraccion != null) {
             val spinner = findViewById<Spinner>(R.id.numPuestos)
             val asientos = spinner.selectedItem.toString().toInt()
             val fecha = findViewById<CalendarView>(R.id.calendarView).date
             val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date(fecha))
             val hora = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
 
-            val reserva = Reserva()
-            reserva.numero = generateReservationNumber()
-            reserva.rParque = parque
-            reserva.rAtraccion = atraccion
-            reserva.rEstado = true
-            reserva.hora = hora
-            reserva.fecha = formattedDate
-            reserva.asientos = asientos
-            reserva.titular = user.uid
+            val reserva = Reserva(
+                numero = generateReservationNumber(),
+                rParque = parque,
+                rAtraccion = atraccion,
+                rAId = idAtraccion,
+                rEstado = true,
+                hora = hora,
+                fecha = formattedDate,
+                asientos = asientos,
+                titular = user.uid
+            )
+
 
             val reservasPath = "reservas/${user.uid}/${reserva.numero}"
             myRef = database.getReference(reservasPath)
