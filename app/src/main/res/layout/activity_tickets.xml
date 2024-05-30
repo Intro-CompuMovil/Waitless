@@ -116,7 +116,7 @@
     <RelativeLayout
         android:id = "@+id/contenedor"
         android:layout_width="match_parent"
-        android:layout_height="520dp"
+        android:layout_height="650dp"
         android:layout_below="@id/franjaSuperior"
         android:padding="30dp">
 
