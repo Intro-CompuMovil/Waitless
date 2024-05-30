@@ -38,7 +38,8 @@
         android:layout_toStartOf="@id/iconoMapa"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/qrcode"
-        android:contentDescription="@string/codigo_qr"/>
+        android:contentDescription="@string/codigo_qr"
+        app:tint="@color/red"/>
 
     <ImageButton
         android:id="@+id/iconoHome"
@@ -136,7 +137,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/red"
-            android:text="@string/ok" />
+            android:text="Escanear" />
 
         <RelativeLayout
             android:id="@+id/camara"
@@ -145,7 +146,7 @@
             android:layout_below="@id/escanear"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/Grey"
+            android:background="@drawable/qrimage"
             android:padding="10dp">
 
 

@@ -14,10 +14,14 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.waitless_p1.Data.Atraccion
+import com.example.waitless_p1.Data.Usuario
 import com.example.waitless_p1.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class HomeActivity : AppCompatActivity() {
 
@@ -29,6 +33,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private val database = FirebaseDatabase.getInstance()
     private lateinit var myRef: DatabaseReference
+    private var atracciones = mutableListOf<Atraccion>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,17 +96,24 @@ class HomeActivity : AppCompatActivity() {
             ) {
                 item = parentView.getItemAtPosition(position).toString()
                 val currentUser = auth.currentUser
-                if (currentUser != null) {
+
+                if(currentUser != null){
                     myRef = database.getReference("atracciones")
-                    myRef.get().addOnSuccessListener { dataSnapshot ->
-                        val filteredAttractions = dataSnapshot.children.mapNotNull { it.getValue(Atraccion::class.java) }
-                            .filter { it.parque == item && it.estado }
-
-                        Log.d("HomeActivity", "Filtered Attractions: ${filteredAttractions.size}")
-
-                        // Update the RecyclerViews and adapters with the filtered attractions
-                        actualizarRecyclerViews(filteredAttractions)
-                    }
+                    myRef.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            atracciones.clear()
+                            for(child in dataSnapshot.children){
+                                val atraccion = child.getValue(Atraccion::class.java)
+                                if(atraccion != null && atraccion.estado){
+                                    atracciones.add(atraccion)
+                                }
+                            }
+                            actualizarRecyclerViews(atracciones)
+                        }
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            Log.w("LOAD_USER", "error en la consulta", databaseError.toException())
+                        }
+                    })
                 }
             }
 

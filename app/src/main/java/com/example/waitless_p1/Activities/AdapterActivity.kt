@@ -41,7 +41,8 @@ class AdapterActivity(
                 val intent = Intent(context, CrearReservaActivity::class.java)
                 intent.putExtra("parque", atraccion.parque)
                 intent.putExtra("atraccion", atraccion.aNombre)
-                Log.d("AdapterActivity", "Parque: ${atraccion.parque}, Atracción: ${atraccion.aNombre}")
+                intent.putExtra("idAtraccion", atraccion.aId)
+                Log.d("AdapterActivity", "Parque: ${atraccion.parque}, Atracción: ${atraccion.aNombre}, idAtracción: ${atraccion.aId}")
                 context.startActivity(intent)
             }
         }

@@ -49,6 +49,7 @@
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/home"
         android:contentDescription="@string/home"
+        app:tint="@color/red"
         />
 
     <ImageButton

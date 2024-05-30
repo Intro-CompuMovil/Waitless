@@ -7,11 +7,15 @@ import android.util.Log
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.waitless_p1.Data.Atraccion
 import com.example.waitless_p1.Data.Reserva
 import com.example.waitless_p1.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 
 class ReservasActivity : AppCompatActivity() {
@@ -22,6 +26,7 @@ class ReservasActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
     private lateinit var myRef: DatabaseReference
+    private var reservas = mutableListOf<Reserva>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,14 +71,21 @@ class ReservasActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             myRef = database.getReference("reservas/${currentUser.uid}")
-            myRef.get().addOnSuccessListener { dataSnapshot ->
-                val reservasList = dataSnapshot.children.mapNotNull { it.getValue<Reserva>() }
-                    .filter { it.rEstado }
-                Log.d("ReservasActivity", "Filtered Reservations: ${reservasList.size}")
-                reservasAdapter.updateData(reservasList)
-            }.addOnFailureListener { exception ->
-                Log.e("ReservasActivity", "Error fetching reservations", exception)
-            }
+            myRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    reservas.clear()
+                    for(child in dataSnapshot.children){
+                        val reserva = child.getValue(Reserva::class.java)
+                        if(reserva != null && reserva.rEstado){
+                            reservas.add(reserva)
+                        }
+                    }
+                    reservasAdapter.updateData(reservas)
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.w("LOAD_USER", "error en la consulta", databaseError.toException())
+                }
+            })
         }
     }
 }

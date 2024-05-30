@@ -3,6 +3,7 @@ package com.example.waitless_p1.Activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,9 +12,27 @@ import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.Toast
+import com.example.waitless_p1.Data.Atraccion
+import com.example.waitless_p1.Data.Entrada
+import com.example.waitless_p1.Data.Usuario
 import com.example.waitless_p1.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class TicketsActivity : AppCompatActivity() {
+
+    private var entradas : MutableList<Entrada> = mutableListOf()
+    private var nombresEntradas : MutableList<String> = mutableListOf()
+    private var atraccionesPorId : MutableMap<Int, String> = mutableMapOf()
+
+    //Realtime Database
+    private val database = FirebaseDatabase.getInstance()
+    private lateinit var myRef: DatabaseReference
+    val PATH_ENTRADAS="entradas/"
+    val PATH_ATTRACTIONS="atracciones/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tickets)
@@ -40,10 +59,60 @@ class TicketsActivity : AppCompatActivity() {
             Toast.makeText(this, "Sensor tema", Toast.LENGTH_LONG).show()
         }
 
-        val spinner = findViewById<Spinner>(R.id.tipoEntrada)
-        val listView = findViewById<ListView>(R.id.Atracciones)
+        loadAttractionsNames()
+        //Para pantalla sensor NFC
+        val nfc_button = findViewById<Button>(R.id.escNFC)
+        nfc_button.setOnClickListener {
+            startActivity(Intent(this, NFCActivity::class.java))
+        }
 
-        val atraccionesAdapter = ArrayAdapter<String> (this, android.R.layout.simple_list_item_1)
+    }
+
+    private fun loadEntradas() {
+        myRef = database.getReference(PATH_ENTRADAS)
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for(singleSnapshot in dataSnapshot.children){
+                    val entrada = singleSnapshot.getValue(Entrada::class.java)
+                    if(entrada != null){
+                        entradas.add(entrada)
+                        nombresEntradas.add(entrada.nombre)
+                    }
+                }
+                val spinner = findViewById<Spinner>(R.id.tipoEntrada)
+                val adapter = ArrayAdapter<String>(this@TicketsActivity, android.R.layout.simple_spinner_item, nombresEntradas)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = adapter
+
+                addValuesToList(spinner);
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w("LOAD_USER", "error en la consulta", databaseError.toException())
+            }
+        })
+    }
+
+    private fun loadAttractionsNames(){
+        myRef = database.getReference(PATH_ATTRACTIONS)
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for(singleSnapshot in dataSnapshot.children){
+                    val atraccion = singleSnapshot.getValue(Atraccion::class.java)
+                    if(atraccion != null){
+                        atraccionesPorId[atraccion.aId] = atraccion.aNombre
+                    }
+                }
+                loadEntradas()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w("LOAD_USER", "error en la consulta", databaseError.toException())
+            }
+        })
+    }
+
+    private fun addValuesToList(spinner: Spinner){
+        val listView = findViewById<ListView>(R.id.Atracciones)
+        val atraccionesAdapter = ArrayAdapter<String> (this@TicketsActivity, android.R.layout.simple_list_item_1)
         listView.adapter = atraccionesAdapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -53,11 +122,10 @@ class TicketsActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val entradaSeleccionada = resources.getStringArray(R.array.tiposEntradas)[position]
-                val atracciones = atraccionesPorEntrada [entradaSeleccionada]
-                atracciones?.let {
-                    atraccionesAdapter.clear()
-                    atraccionesAdapter.addAll(it)
+                val atraccionesIds = entradas[position].atracciones
+                atraccionesAdapter.clear()
+                for (atraccionId in atraccionesIds){
+                    atraccionesAdapter.add(atraccionesPorId[atraccionId]!!)
                 }
             }
 
@@ -65,20 +133,7 @@ class TicketsActivity : AppCompatActivity() {
                 atraccionesAdapter.clear()
             }
         }
-
-        //Para pantalla sensor NFC
-        val nfc_button = findViewById<Button>(R.id.escNFC)
-        nfc_button.setOnClickListener {
-            startActivity(Intent(this, NFCActivity::class.java))
-        }
-
     }
 
-    private val atraccionesPorEntrada = mapOf(
-        "Entrada Basica" to listOf("Rueda De La Fortuna", "Montaña Rusa", "Casa De Los Espejos"),
-        "Entrada VIP" to listOf("Apocalipsis", "Castillo Del Terror", "Tornado", "Rueda De La Fortuna", "Montaña Rusa"),
-        "Entrada PRO" to listOf("Apocalipsis", "Karts", "Castillo Del Terror", "Tornado", "Rueda De La Fortuna", "Montaña Rusa", "Simuladores Virtuales"),
-        "Entrada Familiar" to listOf("Rueda De La Fortuna", "Casa De Los Espejos", "Juego Infantiles", "Toboganes")
-    )
 
 }
