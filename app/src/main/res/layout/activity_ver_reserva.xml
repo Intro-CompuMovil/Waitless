@@ -99,18 +99,6 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/perfil" />
 
-        <ImageButton
-            android:id="@+id/tema"
-            android:layout_width="72dp"
-            android:layout_height="48dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_toStartOf="@id/nombreApp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/tema"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/tono" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -272,7 +260,7 @@
             android:layout_height="160dp"
             android:layout_below="@+id/blanco4"
             android:scaleType="centerCrop"
-            android:src="@drawable/apocalipsis" />
+            />
 
     </RelativeLayout>
 

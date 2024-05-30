@@ -71,9 +71,6 @@ class HomeActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.iconoPerfil).setOnClickListener {
             startActivity(Intent(this, PerfilActivity::class.java))
         }
-        findViewById<ImageButton>(R.id.tema).setOnClickListener {
-            Toast.makeText(this, "Sensor cambio tema", Toast.LENGTH_LONG).show()
-        }
 
         val parques = findViewById<Spinner>(R.id.parques)
         val botonMapa = findViewById<Button>(R.id.rutaParque)

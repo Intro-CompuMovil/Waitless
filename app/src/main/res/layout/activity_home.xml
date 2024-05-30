@@ -99,25 +99,14 @@
             app:srcCompat="@drawable/perfil"
             android:contentDescription="@string/perfil"/>
 
-        <ImageButton
-            android:id="@+id/tema"
-            android:layout_width="72dp"
-            android:layout_height="48dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_toStartOf="@id/nombreApp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/tema"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/tono" />
-
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="590dp"
+        android:layout_height="650dp"
         android:layout_below="@+id/franjaSuperior"
-        android:padding="30dp">
+        android:paddingHorizontal="30dp"
+        android:paddingTop="30dp">
 
         <TextView
             android:id="@+id/contenido"
@@ -168,7 +157,7 @@
         <LinearLayout
             android:id="@+id/recyclerViewContainer"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:layout_below="@id/space"
             android:orientation="horizontal"

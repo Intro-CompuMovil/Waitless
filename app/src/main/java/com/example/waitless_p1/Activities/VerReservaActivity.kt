@@ -24,7 +24,6 @@ class VerReservaActivity : AppCompatActivity() {
     private lateinit var iconoTicket: ImageButton
     private lateinit var iconoReserva: ImageButton
     private lateinit var iconoPerfil: ImageButton
-    private lateinit var tema: ImageButton
 
     private lateinit var nombreAtra: TextView
     private lateinit var hora2: TextView
@@ -46,7 +45,6 @@ class VerReservaActivity : AppCompatActivity() {
         iconoTicket = findViewById(R.id.iconoTicket)
         iconoReserva = findViewById(R.id.iconoReserva)
         iconoPerfil = findViewById(R.id.iconoPerfil)
-        tema = findViewById(R.id.tema)
 
         nombreAtra = findViewById(R.id.nombreAtra)
         hora2 = findViewById(R.id.hora2)
@@ -97,9 +95,6 @@ class VerReservaActivity : AppCompatActivity() {
         }
         iconoPerfil.setOnClickListener {
             startActivity(Intent(this, PerfilActivity::class.java))
-        }
-        tema.setOnClickListener {
-            // Acción para cambiar tema
         }
     }
 

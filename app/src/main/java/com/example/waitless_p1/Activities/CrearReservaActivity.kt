@@ -63,9 +63,6 @@ class CrearReservaActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.iconoPerfil).setOnClickListener {
             startActivity(Intent(this, PerfilActivity::class.java))
         }
-        findViewById<ImageButton>(R.id.tema).setOnClickListener {
-            Toast.makeText(this, "Sensor tema", Toast.LENGTH_LONG).show()
-        }
     }
 
     private fun createReservation(parque: String?, atraccion: String?, idAtraccion: Int?) {

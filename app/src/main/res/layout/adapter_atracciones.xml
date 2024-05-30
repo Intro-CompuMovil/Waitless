@@ -9,7 +9,7 @@
     android:padding="10dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="6dp" >
@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:gravity="center"
             android:background="@color/Grey"
             android:padding="16dp">
@@ -26,26 +26,33 @@
                 android:id="@+id/profile_image1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/apocalipsis" />
-
-            <TextView
-                android:id="@+id/tituloAtraccion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:text="Titulo" />
-
-            <Button
-                android:id="@+id/buttonReserva"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/red"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:text="@string/reservar"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tituloAtraccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="Titulo" />
+
+                <Button
+                    android:id="@+id/buttonReserva"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/red"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/reservar"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
