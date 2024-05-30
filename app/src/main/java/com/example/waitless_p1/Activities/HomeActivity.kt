@@ -117,30 +117,26 @@ class HomeActivity : AppCompatActivity() {
         recyclerViews.clear()
         adapters.clear()
 
-        // Agrupar atracciones por cada 4 elementos (puedes ajustar este número según tus necesidades)
-        atraccionesPorParque = atracciones.chunked(4)
+        // Crear un único RecyclerView
+        val recyclerView = RecyclerView(this)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val adapter = AdapterActivity(atracciones, { abrirDetalles(it) }, this)
+        recyclerView.adapter = adapter
 
-        // Crear y configurar RecyclerViews y adaptadores dinámicamente
-        for (atraccionesChunk in atraccionesPorParque) {
-            val recyclerView = RecyclerView(this)
-            recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            val adapter = AdapterActivity(atraccionesChunk, { abrirDetalles(it) }, this)
-            recyclerView.adapter = adapter
+        // Agregar RecyclerView y adaptador a las listas correspondientes
+        recyclerViews.add(recyclerView)
+        adapters.add(adapter)
 
-            // Agregar RecyclerView y adaptador a las listas correspondientes
-            recyclerViews.add(recyclerView)
-            adapters.add(adapter)
-
-            // Agregar RecyclerView al contenedor lineal
-            recyclerViewContainer.addView(recyclerView)
-        }
+        // Agregar RecyclerView al contenedor lineal
+        recyclerViewContainer.addView(recyclerView)
     }
 
     private fun abrirDetalles(atraccion: Atraccion) {
         val intent = Intent(this, CrearReservaActivity::class.java)
         intent.putExtra("parque", atraccion.parque)
         intent.putExtra("atraccion", atraccion.aNombre)
-        Log.d("HomeActivity", "Parque: ${atraccion.parque}, Atracción: ${atraccion.aNombre}")
+        intent.putExtra("idAtraccion", atraccion.aId)
+        Log.d("HomeActivity", "Parque: ${atraccion.parque}, Atracción: ${atraccion.aNombre}, Id: ${atraccion.aId}")
 
         startActivity(intent)
     }

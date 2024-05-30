@@ -120,69 +120,22 @@
         android:padding="30dp">
 
         <TextView
-            android:id="@+id/escanear"
+            android:id="@+id/reservas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
             android:text="@string/reservas"
             android:textColor="@color/red"
+            android:textStyle="bold"
             android:textSize="30sp" />
 
-        <RelativeLayout
-            android:id="@+id/atraccionIndividual"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewReservas"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_below="@id/escanear"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/Grey"
-            android:padding="10dp">
-
-            <ImageView
-                android:id="@id/imagenAtraccion"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/apocalipsis"/>
-
-            <TextView
-                android:id="@+id/nombreAtraccion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/imagenAtraccion"
-                android:layout_alignParentEnd="true"
-                android:textSize="20sp"
-                android:layout_marginStart="10dp"
-                />
-
-            <Button
-                android:id="@+id/verDetallesReserva"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/imagenAtraccion"
-                android:layout_below="@id/nombreAtraccion"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:backgroundTint="@color/red"
-                android:text="@string/ver_detalles" />
-
-            <Button
-                android:id="@+id/cancelarReserva"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/imagenAtraccion"
-                android:layout_below="@id/verDetallesReserva"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:backgroundTint="@color/Yellow"
-                android:text="@string/cancelar" />
-
-
-        </RelativeLayout>
+            android:layout_height="match_parent"
+            android:layout_below="@id/reservas"
+            />
 
 
     </RelativeLayout>
