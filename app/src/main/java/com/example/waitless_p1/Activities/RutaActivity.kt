@@ -158,7 +158,7 @@ class RutaActivity : AppCompatActivity() {
                 if (map != null) {
                     roadOverlay?.let { map.overlays.remove(it) }
                     roadOverlay = RoadManager.buildRoadOverlay(road)
-                    roadOverlay?.outlinePaint?.color = Color.RED
+                    roadOverlay?.outlinePaint?.color = Color.MAGENTA
                     roadOverlay?.outlinePaint?.strokeWidth = 10f
                     map.overlays.add(roadOverlay)
                     val distance =  String.format("%.2f", start.distanceToAsDouble(finish) / 1000)
@@ -178,6 +178,7 @@ class RutaActivity : AppCompatActivity() {
             val marker = Marker(map)
             marker.position = GeoPoint(location.latitude, location.longitude)
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            marker.setIcon(resources.getDrawable(R.drawable.atraccion))
             map.overlays.add(marker)
 
             val mylocation = GeoPoint(myLocation!!.latitude, myLocation!!.longitude)
@@ -187,6 +188,7 @@ class RutaActivity : AppCompatActivity() {
             val myLocationMarker = Marker(map)
             myLocationMarker.position = mylocation
             myLocationMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            myLocationMarker.setIcon(resources.getDrawable(R.drawable.pin_de_ubicacion))
             map.overlays.add(myLocationMarker)
 
             drawRoute(mylocation, location)
