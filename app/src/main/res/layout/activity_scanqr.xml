@@ -38,7 +38,8 @@
         android:layout_toStartOf="@id/iconoMapa"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/qrcode"
-        android:contentDescription="@string/codigo_qr"/>
+        android:contentDescription="@string/codigo_qr"
+        app:tint="@color/red"/>
 
     <ImageButton
         android:id="@+id/iconoHome"
